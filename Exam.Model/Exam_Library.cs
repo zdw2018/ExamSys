@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +13,23 @@ namespace Exam.Model
     /// </summary>
     public class Exam_Library
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
         /// <summary>
         /// 题库编号
         /// </summary>
         public int LibraryID { get; set; }
+        [StringLength(20)]
         /// <summary>
         /// 题库名称
         /// </summary>
         public string Library_Name { get; set; }
+        [StringLength(200)]
         /// <summary>
         /// 题库备注
         /// </summary>
         public string Library_Remark { get; set; }
+        
         /// <summary>
         /// 添加时间
         /// </summary>

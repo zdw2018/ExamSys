@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +13,13 @@ namespace Exam.Model
     /// </summary>
     public class Exam_Answer
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         /// <summary>
         /// 答题编号
-        /// </summary>
+        /// </summary>       
         public int AnswerID { get; set; }
+        [ForeignKey("Exam_User")]
         /// <summary>
         /// 用户编号
         /// </summary>
@@ -26,7 +31,7 @@ namespace Exam.Model
         /// <summary>
         /// 试卷编号
         /// </summary>
-        public int PaperID { get; set; }
+        public int PaperID { get; set; }       
         /// <summary>
         /// 试题编号
         /// </summary>
@@ -39,6 +44,10 @@ namespace Exam.Model
         /// 答题选项编号
         /// </summary>
         public int AnswerOptionID { get; set; }
-    
+        /// <summary>
+        /// 导航属性
+        /// </summary>
+        public virtual Exam_User Exam_User { get; set; }
+
     }
 }

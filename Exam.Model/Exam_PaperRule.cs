@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +13,13 @@ namespace Exam.Model
     /// </summary>
     public class Exam_PaperRule
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
         /// <summary>
         /// 试卷规则编号
         /// </summary>
         public int PaperRuleID { get; set; }
+        [StringLength(20)]
         /// <summary>
         /// 考试名称
         /// </summary>
