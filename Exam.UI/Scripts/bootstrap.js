@@ -1392,7 +1392,9 @@ if (typeof jQuery === 'undefined') {
       return sanitizeFn(unsafeHtml)
     }
 
-    // IE 8 and below don't support createHTMLDocument
+    // IE 8 and below don't support create
+
+ument
     if (!document.implementation || !document.implementation.createHTMLDocument) {
       return unsafeHtml
     }

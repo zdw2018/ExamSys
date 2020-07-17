@@ -1,3 +1,4 @@
+
 /**
  * LarryCMS Common模块
  * Autor: Larry 
@@ -232,7 +233,7 @@ layui.define(['element','layer','jquery'],function(exports){
             script.setAttribute("async", true);
 	        script.setAttribute("defer", true);
 
-	        var jqUrl = arguments[2] ? arguments[2] : '/Areas/Backstage/Content/common/js/jquery-1.12.4.min.js';
+           var jqUrl = arguments[2] ? arguments[2] : '/scripts/jquery-3.4.1.min.js';
             var urlArrayJq = jqUrl.split("?")[0].split("/");
             var jq_src = urlArrayJq[urlArrayJq.length - 1];
             //环境中无$对象存在的时执行（基本用不上）
@@ -329,7 +330,8 @@ layui.define(['element','layer','jquery'],function(exports){
     * @param       {Function}               fn [description]
     * @return      {[type]}                    [description]
     */
-   function htmldoc(fn){
+    function htmldoc(fn) {
+        
    	    return fn.toString().split('\n').slice(1,-1).join('\n')+'\n';
    }
    exports('common',LarryCommon);
