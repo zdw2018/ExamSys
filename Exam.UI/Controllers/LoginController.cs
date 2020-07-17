@@ -9,6 +9,7 @@ using Utility;
 using Exam.Model;
 using Exam.BLL;
 using Exam.UI.Filter;
+using System.Runtime.Remoting;
 
 namespace Exam.UI.Controllers
 {
@@ -44,8 +45,9 @@ namespace Exam.UI.Controllers
             if (res != null)
             {
                 //写入凭证
-                Session.Timeout = 30;
-                this.HttpContext.Session[CommonFeild.SessionName] = res;
+                //Session.Timeout = 30;
+                //SessionHelper.SetSession(CommonFeild.SessionName, res);
+                //this.HttpContext.Session[CommonFeild.SessionName] = res;
                
                 //登录成功
                 return Json(new { Role = res.UserType, msg = "登录成功" + res.UserName, success = true });
@@ -55,5 +57,6 @@ namespace Exam.UI.Controllers
 
             return Json(new { msg = "登录失败，请检查账号密码", success = false });
         }
+       
     }
 }

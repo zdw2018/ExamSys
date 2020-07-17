@@ -13,8 +13,14 @@ namespace Exam.UI.Controllers
         //[StudentFilter]
         public ActionResult Index()
         {
-            var s = Session[CommonFeild.SessionName];
+
+            //var s = SessionHelper.GetSession(CommonFeild.SessionName);
+            //var s = Session[CommonFeild.SessionName];
        
+            return View();
+        }
+        public ActionResult Main()
+        {
             return View();
         }
     }

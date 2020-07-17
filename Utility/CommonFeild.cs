@@ -8,6 +8,7 @@ namespace Utility
 {
    public class CommonFeild
     {
-        public static string SessionName="LoginInfo";
+        public static string SessionName="UserInfo";
+        public static string SessionID = "";
     }
 }

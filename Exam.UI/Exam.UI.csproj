@@ -52,6 +52,12 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>D:\百度网盘下载\BFWebManage\BFWebManage\BFWebManage\bin\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>D:\百度网盘下载\BFWebManage\BFWebManage\BFWebManage\bin\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -127,7 +133,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ExamMannageController.cs" />
+    <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PaperController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\StudentMannagerController.cs" />
     <Compile Include="Filter\AdminFilter.cs" />
     <Compile Include="Filter\LoginFilter.cs" />
     <Compile Include="Filter\StudentFilter.cs" />
@@ -297,6 +308,7 @@
     <Content Include="Content\images\photo\admin.png" />
     <Content Include="Content\images\temp-bg.jpg" />
     <Content Include="Content\images\user.jpg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Scripts\article.js" />
     <Content Include="Content\Scripts\common.js" />
     <Content Include="Content\Scripts\fileinput\fileinput.min.js" />
@@ -347,11 +359,16 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Main.cshtml" />
-    <Content Include="Views\Login\Main.cshtml" />
+    <Content Include="Views\StudentMannager\Index.cshtml" />
+    <Content Include="Views\StudentMannager\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\ExamMannage\" />
+    <Folder Include="Views\Library\" />
+    <Folder Include="Views\Paper\" />
+    <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

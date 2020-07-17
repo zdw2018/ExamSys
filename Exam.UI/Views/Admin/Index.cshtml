@@ -27,16 +27,14 @@
     <link href="~/Content/Common/css/gobal.css" rel="stylesheet" media="all" />
     <link href="~/Content/css/backstage.css" rel="stylesheet" />
 
-    @*<link rel="stylesheet" type="text/css" href="/Areas/Backstage/Content/common/frame/layui/css/layui.css" media="all">
-        <link rel="stylesheet" type="text/css" href="/Areas/Backstage/Content/common/css/gobal.css" media="all">
-        <link rel="stylesheet" type="text/css" href="/Areas/Backstage/Content/css/backstage.css" media="all">*@
+
 </head>
 <body>
     <div class="layui-layout layui-layout-admin larrycms-admin" id="larry_admin_out">
         <!-- 顶部导航 -->
         <div class="layui-header larrycms-header">
             <div class="layui-logo larrycms-logo">
-
+                
                 <!-- <img src="/Areas/Backstage/Content/common/images/logo.png"> -->
                 后台管理系统
             </div>
@@ -86,6 +84,24 @@
                 <div class="sys-menu-box">
                     <ul class="layui-nav layui-nav-tree" id="larry_left_menu" lay-filter="LarrySide" data-group='0'>
                         <!-- 此次动态生成 -->
+                        <li class="layui-nav-item layui-this">
+                            <a data-url="/Admin/Main"><i class="larry-icon" data-icon="&#xe68e"></i><cite>后台首页</cite></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a data-url="/StudentMannager/Index"><i class="larry-icon" data-icon="&#xe613">&#xe613</i><cite>学生管理</cite></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a data-url="/Library/Index"><i class="larry-icon" data-icon="&#xe62a">&#xe62a</i><cite>题库管理</cite></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a data-url="/Question/Index"><i class="larry-icon" data-icon="&#xe621">&#xe621</i><cite>题目管理</cite></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a data-url="/ExamMannage/Index"><i class="larry-icon" data-icon="&#xe629">&#xe629</i><cite>考试管理</cite></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a data-url="/Paper/Index"><i class="larry-icon" data-icon="&#xe655">&#xe655</i><cite>试卷管理</cite></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -135,7 +151,7 @@
                 </div>
                 <div class="layui-tab-content" id="larry_tab_content">
                     <div class="layui-tab-item layui-show">
-                        <iframe class="larry-iframe" data-id='0' name="ifr_0" id='ifr0' src="main"></iframe>
+                        <iframe class="larry-iframe" data-id='0' name="ifr_0" id='ifr0' src="Main"></iframe>
                     </div>
                 </div>
             </div>
