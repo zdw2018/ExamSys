@@ -1,216 +1,249 @@
-﻿@using Exam.Model;
-@using Utility;
-@{
-    Layout = null;
-    //string name = (Session[CommonFeild.SessionName] as Exam_User).RealName;
-
-}
-
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>厚浦在线笔试考试系统</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="Author" content="larry" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>H+ 后台主题UI框架 - 主页</title>
 
-    <!-- load css -->
-    <link href="~/Content/Common/frame/layui/css/layui.css" rel="stylesheet" media="all" />
-    <link href="~/Content/Common/css/gobal.css" rel="stylesheet" media="all" />
-    <link href="~/Content/css/backstage.css" rel="stylesheet" />
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
 
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <link href="~/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/style.min.css?v=4.0.0" rel="stylesheet">
 </head>
-<body>
-    <div class="layui-layout layui-layout-admin larrycms-admin" id="larry_admin_out">
-        <!-- 顶部导航 -->
-        <div class="layui-header larrycms-header">
-            <div class="layui-logo larrycms-logo">
-                
-                <!-- <img src="/Areas/Backstage/Content/common/images/logo.png"> -->
-                后台管理系统
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close">
+                <i class="fa fa-times-circle"></i>
             </div>
-            <!-- 右侧 -->
-            <div class="larrycms-top pos-a">
-                <div class="menu-switch pos-a" id="menuSwitch"><i class="larry-icon pos-a fz20">&#xe6cc;</i></div>
-                <div class="menu-mobile pos-a" id="larryMobile"><i class="larry-icon pos-a fz20">&#xe6d6;</i></div>
-                <!-- 顶级菜单 -->
-                <div class="inline-block larrycms-top-menu pos-a">
-                    <ul class="layui-nav clearfix" id="larry_top_menu" lay-filter="TopMenu">
-                        <!-- 此次动态生成 -->
-                    </ul>
-                </div>
-                <!-- 右侧常用菜单 -->
-                <div class="inline-block larrycms-offten-menu pos-a">
-                    <ul class="layui-nav clearfix">
-                        <li class="layui-nav-item">
-                            <a target="_blank" href="/Default/Index"><i class="larry-icon">&#xe67d;</i>查看首页</a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a id="FullScreen" class="onFullScreen"><i class="larry-icon">&#xe72f;</i>全屏</a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a id="clearCached"><i class="larry-icon">&#xe6e7;</i>清除缓存</a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a id="larryTheme"><i class="larry-icon">&#xe713;</i>设置主题</a>
-                        </li>
-                        <li class="layui-nav-item exit">
-                            <a id="logout"><i class="larry-icon">&#xe68f;</i><cite>退出</cite></a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="~/img/profile_small.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
+                                    <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                </span>
+                            </a>
+                        </div>
+
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="/Admin/Main">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">主页</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="/StudentMannager/Index">
+                            <i class="fa fa-users"></i>
+                            <span class="nav-label">学生管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="/Library/Index">
+                            <i class="fa fa-suitcase"></i>
+                            <span class="nav-label">题库管理</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="/Question/Index">
+                            <i class="fa fa-sticky-note-o"></i> <span class="nav-label">题目管理</span>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="/Paper/Index"><i class="fa fa-desktop"></i> <span class="nav-label">试卷管理</span></a>
+
+                    <li>
+                    <li>
+                        <a class="J_menuItem" href="/ExamMannage/Index"><i class="fa fa-desktop"></i> <span class="nav-label">考试管理</span></a>
+                </ul>
             </div>
-        </div>
-        <!-- 左侧区域 -->
-        <div class="layui-side pos-a larrycms-left layui-bg-black" id="larry_left">
-            <div class="layui-side-scroll">
-                <!-- 管理员信息      -->
-                <div class="user-info">
-                    <div class="photo">
-                        <img src="~/Content/images/user.jpg" />
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                            <div class="form-group">
+                                
+                            </div>
+                        </form>
                     </div>
-                    <p>name,您好！</p>
-                </div>
-                <!-- 系统菜单 -->
-                <div class="sys-menu-box">
-                    <ul class="layui-nav layui-nav-tree" id="larry_left_menu" lay-filter="LarrySide" data-group='0'>
-                        <!-- 此次动态生成 -->
-                        <li class="layui-nav-item layui-this">
-                            <a data-url="/Admin/Main"><i class="larry-icon" data-icon="&#xe68e"></i><cite>后台首页</cite></a>
+                    <ul class="nav navbar-top-links navbar-right">
+                   
+                        <li class="dropdown hidden-xs">
+                            <a class="right-sidebar-toggle" aria-expanded="false">
+                                <i class="fa fa-tasks"></i> 主题
+                            </a>
                         </li>
-                        <li class="layui-nav-item">
-                            <a data-url="StudentMannager/Index"><i class="larry-icon" data-icon="&#xe613">&#xe613</i><cite>学生管理</cite></a>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left J_tabLeft">
+                    <i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="Main">首页</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right J_tabRight">
+                    <i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">
+                        关闭操作<span class="caret"></span>
+
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li class="J_tabShowActive">
+                            <a>定位当前选项卡</a>
                         </li>
-                        <li class="layui-nav-item">
-                            <a data-url="Library/Index"><i class="larry-icon" data-icon="&#xe62a">&#xe62a</i><cite>题库管理</cite></a>
+                        <li class="divider"></li>
+                        <li class="J_tabCloseAll">
+                            <a>关闭全部选项卡</a>
                         </li>
-                        <li class="layui-nav-item">
-                            <a data-url="Question/Index"><i class="larry-icon" data-icon="&#xe621">&#xe621</i><cite>题目管理</cite></a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a data-url="ExamMannage/Index"><i class="larry-icon" data-icon="&#xe629">&#xe629</i><cite>考试管理</cite></a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a data-url="Paper/Index"><i class="larry-icon" data-icon="&#xe655">&#xe655</i><cite>试卷管理</cite></a>
+                        <li class="J_tabCloseOther">
+                            <a>关闭其他选项卡</a>
                         </li>
                     </ul>
                 </div>
+                <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>
+            <div class="row J_mainContent" id="content-main">
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="Main" frameborder="0" data-id="index_v2.html" seamless></iframe>
+            </div>
+            <div class="footer">
+                <div class="pull-right">
+                    &copy; 2020 <a href="#" target="_blank">###</a>
+                </div>
             </div>
         </div>
-        <!-- 内容主体区域 -->
-        <div class="layui-body pos-a larrycms-body" id="larry_body">
-            <div class="layui-tab larrycms-tab" id="larry_tab" lay-filter="larryTab">
-                <div class="larrycms-title-box"></div>
-                <div class="go-left">
-                    <div class="key-press pressKey" id="titleLeft" title="滚动至最右侧"><i class="larry-icon">&#xe60b;</i></div>
-                </div>
-                <ul class="layui-tab-title larrycms-tab-title" lay-allowclose="true" id="larry_tab_title" lay-filter="subadd">
-                    <li class="layui-this" id="admin-home" lay-id="0" fresh="1">
-                        <i class="larry-icon">&#xe79c;</i><em>后台首页</em>
+        <!--右侧部分结束-->
+        <!--右侧边栏开始-->
+        <div id="right-sidebar">
+            <div class="sidebar-container">
+
+                <ul class="nav nav-tabs navs-3">
+
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-1">
+                            <i class="fa fa-gear"></i> 主题
+                        </a>
                     </li>
                 </ul>
-                <div class="title-right" id="titleRbox">
-                    <div class="go-right key-press pressKey" id="titleRight" title="滚动至最左侧"><i class="larry-icon">&#xe6e0;</i></div>
-                    <div class="refresh key-press" id="refresh_iframe">
-                        <i class="layui-icon layui-anim layui-anim-loop">&#x1002;</i>
-                        <cite>刷新</cite>
-                    </div>
-                    <div class="often key-press" lay-filter="larryOperate" id="buttonRCtrl">
-                        <ul class="layui-nav pos-r">
-                            <li class="layui-nav-item pos-a">
-                                <a class="top"><i class="larry-icon">&#xea51;</i><cite>常用操作</cite><span class="layui-nav-more"></span></a>
-                                <dl class="layui-nav-child layui-anim layui-anim-upbit">
-                                    <dd id="tabCtrD">
-                                        <a data-ename="positionCurrent"><i class="larry-icon">&#xea53;</i>定位当前选项卡</a>
-                                    </dd>
-                                    <dd id="tabCtrA">
-                                        <a data-ename="closeCurrent"><i class="larry-icon">&#xea69;</i>关闭当前选项卡</a>
-                                    </dd>
-                                    <dd id="tabCtrB">
-                                        <a data-ename="closeOther"><i class="larry-icon">&#xea6a;</i>关闭其他选项卡</a>
-                                    </dd>
-                                    <dd id="tabCtrC">
-                                        <a data-ename="closeAll"><i class="larry-icon">&#xea6f;</i>关闭全部选项卡</a>
-                                    </dd>
-                                    <dd>
-                                        <a data-ename="refreshAdmin"><i class="larry-icon">&#xea68;</i>刷新最外层框架</a>
-                                    </dd>
-                                </dl>
-                            </li>
-                        </ul>
+
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="sidebar-title">
+                            <h3> <i class="fa fa-comments-o"></i> 主题设置</h3>
+                            <small><i class="fa fa-tim"></i> 你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。</small>
+                        </div>
+                        <div class="skin-setttings">
+                            <div class="title">主题设置</div>
+                            <div class="setings-item">
+                                <span>收起左侧菜单</span>
+                                <div class="switch">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
+                                        <label class="onoffswitch-label" for="collapsemenu">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setings-item">
+                                <span>固定顶部</span>
+
+                                <div class="switch">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox" id="fixednavbar">
+                                        <label class="onoffswitch-label" for="fixednavbar">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setings-item">
+                                <span>
+                                    固定宽度
+                                </span>
+
+                                <div class="switch">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox" id="boxedlayout">
+                                        <label class="onoffswitch-label" for="boxedlayout">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="title">皮肤选择</div>
+                            <div class="setings-item default-skin nb">
+                                <span class="skin-name ">
+                                    <a href="#" class="s-skin-0">
+                                        默认皮肤
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="setings-item blue-skin nb">
+                                <span class="skin-name ">
+                                    <a href="#" class="s-skin-1">
+                                        蓝色主题
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="setings-item yellow-skin nb">
+                                <span class="skin-name ">
+                                    <a href="#" class="s-skin-3">
+                                        黄色/紫色主题
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-tab-content" id="larry_tab_content">
-                    <div class="layui-tab-item layui-show">
-                        <iframe class="larry-iframe" data-id='0' name="ifr_0" id='ifr0' src="Main"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 底部固定区域 -->
-        <div class="layui-footer pos-a larrycms-footer" id="larry_footer">
-            <div class="layui-main">
 
             </div>
         </div>
     </div>
-    <!-- 加载js文件-->
-    <script src="~/Content/Common/frame/layui/layui.js"></script>
-    <script src="~/Content/Common/js/gobal.js"></script>
-    <script src="~/Scripts/larrycms.js"></script>
-    <!-- 主题配置 -->
-    <div class="larryThemeContent" id="LarryThemeSet" style="display:none;">
-        <div class="larry-theme-form">
-            <h3>系统主题预设</h3>
-            <form action="" class="layui-form larry-theme-con">
-                <div class="layui-form-item select-theme">
-                    <label class="layui-form-label">主题选择</label>
-                    <div class="layui-input-block">
-                        <select lay-filter="larryTheme" lay-verify="" id="themeName">
-                            <option value="larry">默认主题</option>
-                            <option value="A">深蓝主题</option>
-                            <option value="B">墨绿主题</option>
-                            <option value="C">藏青主题</option>
-                            <option value="larry_">我要自定义主题</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item fullscreen">
-                    <label class="layui-form-label">是否全屏</label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" id="checkboxfull" lay-filter="fullscreen" lay-skin="switch" value="1">
-                    </div>
-                </div>
-                <div class="layui-form-item tabSession">
-                    <label class="layui-form-label">开启Tab缓存</label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" id="checkboxtabSession" lay-filter="tabSession" lay-skin="switch" value="1">
-                    </div>
-                    <span>开启后,将保持选项卡状态</span>
-                </div>
-                <div class="layui-form-item autoRefresh">
-                    <label class="layui-form-label">Tab切换刷新</label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" id="autoRefresh" lay-filter="autoRefresh" lay-skin="switch" value="1">
-                    </div>
-                    <span>设置在切换tab选项卡重新打开时是否刷新</span>
-                </div>
-                <div class="layui-form-item submit-form">
-                    <button class="layui-btn larry-button" lay-submit="" lay-filter="submitlocal">立即设置主题</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置当前修改</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <script src="~/js/jquery.min.js?v=2.1.4"></script>
+    <script src="~/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="~/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/js/plugins/layer/layer.min.js"></script>
+    <script src="~/js/hplus.min.js?v=4.0.0"></script>
+    <script type="text/javascript" src="~/js/contabs.min.js"></script>
+    <script src="~/js/plugins/pace/pace.min.js"></script>
 </body>
-</html>
 
+</html>
