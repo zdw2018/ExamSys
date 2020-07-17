@@ -3,7 +3,7 @@
 
 @model IPagedList<Exam.Model.Exam_User>
 
-@{
+@{   
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -57,12 +57,13 @@
                     <td>@item.RealName</td>
                     <td>@item.Phone</td>
                     <td>
-                       @item.States?"已认证":"未认证"
+                       @(item.States?"已认证":"未认证")
+                      
                     </td>
                     <td>@item.CreateTime</td>
                     <td>@item.CreateName</td>
                     <td>
-                        <a onclick="return check_href('/Backstage/News/Edit?id=@item.UserID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                        <a onclick="return check_href('/StudentMannager/Edit?id=@item.UserID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
                             <i class="larry-icon larry-bianji4"></i>编辑
                         </a>
                         <a onclick="return Del(@item.UserID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
@@ -109,7 +110,7 @@
         layer.confirm('确认删除吗？删除后数据不能再恢复！', {
             icon: 3, title: '删除确认'
         }, function (index) {
-            $.post("@Url.Action("Del", "News")", { id: id }, function (data) {
+            $.post("@Url.Action("Delete", "StudentMannager")", { id: id }, function (data) {
                 if (data.success) {
                     window.location.href = window.location.href;
                 }

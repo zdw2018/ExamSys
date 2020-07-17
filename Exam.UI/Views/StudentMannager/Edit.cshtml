@@ -1,9 +1,10 @@
-﻿@{
-    
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    
+﻿@model Exam.Model.Exam_User
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
-    
+
 <div class="larry-fluid larry-wrapper">
     <div class="layui-row lay-col-space20">
         <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -16,24 +17,24 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">用户名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="UserName" id="txt_UserName" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" placeholder="请输入用户名">
+                                <input type="text" name="uname" id="txt_UserName" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" value="@Model.UserName" placeholder="请输入用户名">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">姓名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="RealName" id="txt_RealName" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" placeholder="请输入姓名">
+                                <input type="text" name="Name" id="txt_RealName" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" value="@Model.RealName" placeholder="请输入姓名">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">手机号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="Phone" id="txt_Phone" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" placeholder="请输入姓名">
+                                <input type="text" name="phone" id="txt_Phone" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" value="@Model.Phone" placeholder="请输入手机号">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <input type="hidden" name="lmid" id="txt_lmid" value="@ViewBag.Lmid" />
+                                <input type="hidden" name="id" id="txt_lmid" value="@Model.UserID" />
                                 @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
                                 <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>立即提交</button>
                             </div>
@@ -65,16 +66,16 @@
         //    return false;
         //}
 
-        $.post("@Url.Action("Add", "StudentMannager")",$('#form1').serialize(),function(data)
+        $.post("@Url.Action("Edit", "StudentMannager")",$('#form1').serialize(),function(data)
         {
             if (data.success) {
-                layer.msg("添加成功");
+                layer.msg("修改成功");
                 setTimeout(function () {
                     //top.document.getElementById('tabCtrA').click();
                     window.location.href = "/StudentMannager/Index";
                 }, 1000);
             } else {
-                layer.msg("添加失败," + data.msg);
+                layer.msg("修改失败," + data.msg);
             }
         });
         return false;

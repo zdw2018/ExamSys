@@ -18,6 +18,22 @@ namespace Exam.UI.Controllers
             IPagedList list = StudentMannerService.GetList(page);
             return View(list);
         }
+        public ActionResult Delete(int id)              
+        {
+
+            try
+            {
+                int res = StudentMannerService.RemoveStudent(id);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "删除失败" + ex, success = false });
+
+            }
+            return Json(new { msg = "删除成功", success = true });
+
+          
+        }
         public ActionResult Add()
         {
             return View();
@@ -37,7 +53,7 @@ namespace Exam.UI.Controllers
             };
             try
             {
-                int res = UsersService.InsertUser(u);
+                int res = StudentMannerService.InsertStudent(u);
             }
             catch (Exception ex)
             {
@@ -45,6 +61,28 @@ namespace Exam.UI.Controllers
 
             }
             return Json(new { msg = "添加成功", success = true });   
+        }
+        public ActionResult Edit(int id)
+        {
+         var data= StudentMannerService.FindStudentByID(id);
+
+            return View(data);
+        }
+        [HttpPost]
+        public ActionResult Edit(string uname, string Name, string phone,string id)
+        {
+            Exam_User u = new Exam_User { UserID=Convert.ToInt32(id), RealName=Name, UserName=uname,Phone=phone};
+            try
+            {
+                StudentMannerService.Update(u);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "修改失败" + ex, success = false });
+
+            }
+            return Json(new { msg = "修改成功", success = true });
+
         }
     }
 }

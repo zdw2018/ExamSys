@@ -29,6 +29,7 @@ namespace Exam.BLL
             ExamSysDBContext dBContext = new ExamSysDBContext();
             return dBContext.Exam_User.Where(x => x.UserName == UserName && x.PassWord == pwd).FirstOrDefault();
         }
+  
         public static int InsertUser(Exam_User user)
         {
             ExamSysDBContext dBContext = new ExamSysDBContext();
