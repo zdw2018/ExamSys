@@ -1,0 +1,63 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="larry-fluid larry-wrapper">
+    <div class="layui-row lay-col-space20">
+        <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <section class="larry-body  fadeInRightBig">
+                <div class="larry-body-header">
+                    <span class="tit">添加题库</span>
+                </div>
+                <div class="larry-body-content clearfix">
+                    <form class="layui-form" id="form1">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">题库名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="libraryname" id="txt_libraryname" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" placeholder="题库名称">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">题库备注</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="libraryremark" id="txt_libraryremark"  aautocomplete="off" class="layui-input larry-input" placeholder="请输入题库备注">
+                            </div>
+                        </div>
+                       
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                
+                                @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
+                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>立即提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+
+    function Save()
+    {
+       
+
+        $.post("@Url.Action("Add", "Library")",$('#form1').serialize(),function(data)
+        {
+            if (data.success) {
+                layer.msg("添加成功");
+                setTimeout(function () {
+                    //top.document.getElementById('tabCtrA').click();
+                    window.location.href = "/Library/Index";
+                }, 1000);
+            } else {
+                layer.msg("添加失败," + data.msg);
+            }
+        });
+        return false;
+    }
+</script>
+

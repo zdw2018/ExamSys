@@ -12,7 +12,7 @@ namespace Exam.BLL
     public class StudentMannerService
     {
         /// <summary>
-        /// 获去所有学生数据
+        /// 获取所有学生数据
         /// </summary>
         /// <param name="lmid"></param>
         /// <param name="page"></param>

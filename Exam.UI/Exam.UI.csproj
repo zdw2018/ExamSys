@@ -562,6 +562,8 @@
     <Content Include="Views\Paper\Index.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\StudentMannager\Edit.cshtml" />
+    <Content Include="Views\Library\Edit.cshtml" />
+    <Content Include="Views\Library\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exam.BLL\Exam.BLL.csproj">
