@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Exam.BLL;
 using Exam.Model;
+using Utility;
+using System.IO;
+using System.Data;
 
 namespace Exam.UI.Controllers
 {
@@ -21,16 +24,97 @@ namespace Exam.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult Lead()
+        {
+            var list = LibraryService.GetAll();
+            return View(list);
+        }
+        [HttpPost]
+        public JavaScriptResult Lead(string libraryname, HttpPostedFileBase excelname)
+        {
+            try
+            {
+                if (excelname.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(excelname.FileName);
+
+                    var path = Path.Combine(Server.MapPath("~/Content/ExcelTemp"), fileName);
+                    excelname.SaveAs(path);
+                    DataTable dt = Utility.Converter.ExcelToDataSet(path);
+                    foreach (DataRow item in dt.Rows)
+                    {
+
+                        ///添加试题信息 拿到ID
+                        string title = item["Title"].ToString();
+                        string answer = item["RightOption"].ToString();
+                        string Analyze = item["Analyze"].ToString();
+
+                        string OptionA = item["OptionA"].ToString();
+                        string OptionB = item["OptionB"].ToString();
+                        string OptionC = item["OptionC"].ToString();
+                        string OptionD = item["OptionD"].ToString();
+
+                        Exam_Question q = new Exam_Question { LibraryID = Convert.ToInt32(libraryname), QuestionAnswer = answer, QuestionDescribe = title, QuestionParse = Analyze, Score = 2 };
+                        int id = Exam_QuestionService.Add(q);
+                        ///拿到ID继续添加选项
+                        List<Exam_QuestionOptions> lists =
+                            new List<Exam_QuestionOptions>()
+                            {
+
+                                new Exam_QuestionOptions{
+                                    QuestionID=id,
+                                    CreateTime=DateTime.Now,
+                                    OptionCode="A",
+                                    OptionDescribe=OptionA,
+                                    UpdateTime=DateTime.Now
+                                },
+                                new Exam_QuestionOptions{
+                                    QuestionID=id,
+                                    CreateTime=DateTime.Now,
+                                    OptionCode="B",
+                                    OptionDescribe=OptionB,
+                                    UpdateTime=DateTime.Now
+                                },
+                                new Exam_QuestionOptions{
+                                    QuestionID=id,
+                                    CreateTime=DateTime.Now,
+                                    OptionCode="C",
+                                    OptionDescribe=OptionC,
+                                    UpdateTime=DateTime.Now
+                                },
+                                new Exam_QuestionOptions{
+                                    QuestionID=id,
+                                    CreateTime=DateTime.Now,
+                                    OptionCode="D",
+                                    OptionDescribe=OptionD,
+                                    UpdateTime=DateTime.Now
+                                },
+                            };
+                        QuestionOptionsService.AddOptions(lists);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return JavaScript("<script>layer.msg('添加失败')</script>");
+            }
+
+
+            return this.JavaScript("alert('添加成功')");
+        }
         [HttpPost]
         public ActionResult Add(string libraryname, string libraryremark)
         {
             Exam_Library library = new Exam_Library()
             {
                 CreatTime = DateTime.Now,
-                UpdateTime=DateTime.Now,
+                UpdateTime = DateTime.Now,
                 Library_Remark = libraryremark,
                 Library_Name = libraryname,
-                 LibraryStates=true                  
+                LibraryStates = true
             };
             try
             {
@@ -77,10 +161,10 @@ namespace Exam.UI.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { msg = "删除失败" + ex, success = false });
+                return Json(new { msg = "禁用失败" + ex, success = false });
 
             }
-            return Json(new { msg = "删除成功", success = true });
+            return Json(new { msg = "禁用成功", success = true });
 
         }
     }

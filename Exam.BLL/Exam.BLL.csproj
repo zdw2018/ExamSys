@@ -53,8 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QuestionOptionsService.cs" />
+    <Compile Include="QuestionService.cs" />
     <Compile Include="LibraryService.cs" />
+    <Compile Include="PaperRuleService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleDetailService.cs" />
     <Compile Include="StudentMannerService.cs" />
     <Compile Include="UsersService.cs" />
   </ItemGroup>

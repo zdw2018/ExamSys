@@ -24,6 +24,12 @@ namespace Exam.BLL
             IPagedList list = db.Exam_Library.OrderBy(x => x.LibraryID).ToPagedList(page, pagesize);
             return list;
         }
+        public static List<Exam_Library> GetAll()
+        {
+            ExamSysDBContext db = new ExamSysDBContext();
+            var list = db.Exam_Library.ToList();
+            return list;
+        }
         /// <summary>
         /// 增加题库
         /// </summary>

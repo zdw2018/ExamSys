@@ -173,7 +173,7 @@ namespace Utility
         private XmlDocument loadConfigDoc(XmlDocument cfgDoc)
         {
             // load the config file 
-            if (Convert.ToInt32(ConfigType) == Convert.ToInt32(ConfigFileType.AppConfig))
+            if (System.Convert.ToInt32(ConfigType) == System.Convert.ToInt32(ConfigFileType.AppConfig))
             {
                 docName = ((Assembly.GetEntryAssembly()).GetName()).Name;
                 docName += ".exe.config";

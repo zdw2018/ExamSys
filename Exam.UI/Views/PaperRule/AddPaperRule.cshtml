@@ -1,0 +1,83 @@
+﻿
+@model List<Exam.Model.Exam_PaperRule>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="larry-fluid larry-wrapper">
+    <div class="layui-row lay-col-space20">
+        <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <section class="larry-body  fadeInRightBig">
+                <div class="larry-body-header">
+                    <span class="tit">添加试卷规则</span>
+                </div>
+                <div class="larry-body-content clearfix">
+                    <form class="layui-form" id="form1" method="post" action="Lead" enctype="multipart/form-data">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">请选择试卷名称</label>
+                            <div class="layui-input-block">
+                                <select name="paperruleid" lay-verify="required">
+                                    <option value=""></option>
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.PaperRuleID">@item.RuleName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">请选择题库</label>
+                            <div class="layui-input-block">
+                                <select name="libraryid" lay-verify="required">
+                                    <option value=""></option>
+                                    @foreach (var item in ViewBag.Library)
+                                    {
+                                        <option value="@item.LibraryID">@item.Library_Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">试题数量</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="questionnum" id="txt_questionnum" required lay-verify="required|number" aautocomplete="off" class="layui-input larry-input" placeholder="试题数量">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+
+                                @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
+                                <button class="layui-btn larry-btn" lay-filter="submit" lay-submit>立即提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use('upload', function () {
+        layui.upload(options);
+    });
+
+    function Save()
+    {
+
+
+        $.post("@Url.Action("AddPaperRule", "PaperRule")",$('#form1').serialize(),function(data)
+        {
+            if (data.success) {
+                layer.msg("添加成功");
+                setTimeout(function () {
+                    //top.document.getElementById('tabCtrA').click();
+                    window.location.href = "/PaperRule/Index";
+                }, 1000);
+            } else {
+                layer.msg("添加失败," + data.msg);
+            }
+        });
+        return false;
+    }
+</script>
+
+

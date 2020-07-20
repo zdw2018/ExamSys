@@ -23,7 +23,7 @@ namespace Exam.Model
         /// <summary>
         /// 考试名称
         /// </summary>
-        public string Rule_Name { get; set; }
+        public string RuleName { get; set; }
         /// <summary>
         /// 考试开始时间
         /// </summary>
@@ -40,5 +40,9 @@ namespace Exam.Model
         /// 题目数量
         /// </summary>
         public int QuestionNum { get; set; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public bool States { get; set; }
     }
 }

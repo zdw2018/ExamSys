@@ -1,7 +1,7 @@
 ﻿@using PagedList
 @using PagedList.Mvc
-
-@model IPagedList<Exam.Model.Exam_Library>
+@using Exam.Model
+@model IPagedList<Exam_RuleDetail>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,11 +16,10 @@
                     </div>
                     <a class="layui-btn search_btn">搜索</a>
                 </div>*@
-            <div class="layui-inline">
-                <a class="layui-btn layui-bg-blue" href="/Library/Add">添加</a>
-                <a class="layui-btn layui-bg-blue" href="/Library/Lead">从Excel导入</a>
-                <a class="layui-btn layui-bg-blue" href="~/Content/ExcelTemp/题库导入模板.xlsx">下载题库导入模版</a>
-            </div>
+            @*<div class="layui-inline">
+                <a class="layui-btn layui-bg-blue" href="/PaperRule/AddPaperRule">添加组卷规则</a>
+                <a class="layui-btn layui-bg-blue" href="/PaperRule/AddPaper">添加试卷</a>
+            </div>*@
             @*<div class="layui-inline">
                     <a class="layui-btn layui-bg-pale" data-type="tuijian">推荐文章</a>
                 </div>
@@ -40,38 +39,30 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th>编号</th>
-                    <th>题库名称</th>
-                    <th>添加时间</th>
-                    <th>修改时间</th>
-                    <th>备注</th>
-                    <th>状态</th>
-                    <th>操作</th>
+                    <th>规则编号 </th>
+                    <th>题库名称 </th>
+                    <th>题目数量</th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>@item.LibraryID</td>
-                    <td>@item.Library_Name</td>
-                    <td>@item.CreatTime</td>
-                    <td>@item.UpdateTime</td>
-                    <td>@item.Library_Remark</td>
-                    <td>
-                        @(item.LibraryStates?"启用":"禁用")
+                    <tr>
+                        <td>@item.RuleID</td>
+                        <td>@item.Exam_Library.Library_Name</td>
+                        <td>@item.QuestionNum</td>                                           
+                        <td>
+                            <a onclick="return check_href('/PaperRule/EditRuleDetail?id=@item.PaperRuleID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                                <i class="larry-icon larry-bianji4"></i>编辑
+                            </a>                                                
+                                <a onclick="return Delete(@item.RuleID);" class="ajax-get layui-btn layui-btn-small layui-btn-primary">
+                                    <i class="larry-icon larry-ttpodicon"></i>删除
+                                </a>
+                         
 
-                    </td>
-                  
-                    <td>
-                        <a onclick="return check_href('/Library/Edit?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
-                            <i class="larry-icon larry-bianji4"></i>编辑
-                        </a>
-                        <a onclick="return Disable(@item.LibraryID);"  class="ajax-get layui-btn layui-btn-small layui-btn-danger">
-                            <i class="larry-icon larry-ttpodicon"></i>禁用
-                        </a>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 }
             </tbody>
             <tfoot>
@@ -107,11 +98,11 @@
     </div>
 </div>
 <script>
-    function Disable(id) {
-        layer.confirm('确认禁用吗？', {
-            icon: 3, title: '禁用确认'
+    function Delete(id) {
+        layer.confirm('确定要删除吗？', {
+            icon: 3, title: '删除确认'
         }, function (index) {
-            $.post("@Url.Action("Disable", "Library")", { id: id }, function (data) {
+            $.post("@Url.Action("DeleteRuleDetail", "PaperRule")", { id: id }, function (data) {
                 if (data.success) {
                     window.location.href = window.location.href;
                 }
@@ -121,5 +112,6 @@
             }, "json");
         });
     }
-
+     
 </script>
+

@@ -1,0 +1,88 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+    <script src="~/Content/Common/frame/layui/lay/modules/laydate.js"></script>
+<div class="larry-fluid larry-wrapper">
+    <div class="layui-row lay-col-space20">
+        <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <section class="larry-body  fadeInRightBig">
+                <div class="larry-body-header">
+                    <span class="tit">添加试卷</span>
+                </div>
+                <div class="larry-body-content clearfix">
+                    <form class="layui-form" id="form1">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">试卷名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="rulename" id="txt_rulename" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" placeholder="试卷名称">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">考试开始时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="rulestarttime" id="txt_rulestarttime" required lay-verify="required" aautocomplete="off" class="layui-input larry-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">考试时长（分钟）</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="time" id="txt_time" required lay-verify="required|number" aautocomplete="off" class="layui-input larry-input" placeholder="考试时长(分钟)">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">试题分数</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="score" id="txt_score" required lay-verify="required|number" aautocomplete="off" class="layui-input larry-input" placeholder="试题分数">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">试题数量</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="questionnum" id="txt_questionnum" required lay-verify="required|number" aautocomplete="off" class="layui-input larry-input" placeholder="试题数量">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+
+                                @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
+                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>立即提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+    var laydate = layui.laydate;
+    //日期时间选择器
+    laydate.render({
+        elem: '#txt_rulestarttime'
+        , type: 'datetime'
+    });
+
+
+    function Save()
+    {
+
+
+        $.post("@Url.Action("AddPaper", "PaperRule")",$('#form1').serialize(),function(data)
+        {
+            if (data.success) {
+                layer.msg("添加成功");
+                setTimeout(function () {
+                    window.location.href = "/PaperRule/Index";
+                }, 1000);
+            } else {
+                layer.msg("添加失败," + data.msg);
+            }
+        });
+        return false;
+    }
+</script>
+

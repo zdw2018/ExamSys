@@ -137,6 +137,7 @@
     <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaperController.cs" />
+    <Compile Include="Controllers\PaperRuleController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\StudentMannagerController.cs" />
     <Compile Include="Filter\AdminFilter.cs" />
@@ -556,6 +557,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\ExcelTemp\题库导入模板.xlsx" />
     <None Include="packages.config" />
     <Content Include="Views\Library\Index.cshtml" />
     <Content Include="Views\ExamMannage\Index.cshtml" />
@@ -564,6 +566,12 @@
     <Content Include="Views\StudentMannager\Edit.cshtml" />
     <Content Include="Views\Library\Edit.cshtml" />
     <Content Include="Views\Library\Add.cshtml" />
+    <Content Include="Views\Library\Lead.cshtml" />
+    <Content Include="Views\PaperRule\Index.cshtml" />
+    <Content Include="Views\PaperRule\AddPaper.cshtml" />
+    <Content Include="Views\PaperRule\AddPaperRule.cshtml" />
+    <Content Include="Views\PaperRule\RuleDetail.cshtml" />
+    <Content Include="Views\PaperRule\EditRuleDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exam.BLL\Exam.BLL.csproj">

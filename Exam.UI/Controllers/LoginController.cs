@@ -25,16 +25,7 @@ namespace Exam.UI.Controllers
         }
 
         public JsonResult UserLogin(string userName, string userPwd, string ipaddress)
-        {
-            if (ipaddress == "")
-            {
-                ipaddress = "127.0.0.1";
-            }
-            bool b = ConfigHelper.SetConfigValue("DBContext", $"server={ipaddress};database=ExamSys;uid=sa;pwd=123456789");
-            if (!b)
-            {
-                return Json(new { msg = "配置文件写入错误", success = false });
-            }
+        {            
             //程序初始化添加超级管理员
             if (UsersService.GetUserNum() == 0)
             {

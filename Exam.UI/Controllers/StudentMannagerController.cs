@@ -44,6 +44,7 @@ namespace Exam.UI.Controllers
             Exam_User u = new Exam_User()
             {
                 CreateTime = DateTime.Now,
+                //学生账号默认密码123456
                 PassWord = PassWordHelper.GetMD5("123456"),
                 RealName = RealName,
                 Phone = Phone,
@@ -71,7 +72,7 @@ namespace Exam.UI.Controllers
         [HttpPost]
         public ActionResult Edit(string uname, string Name, string phone,string id)
         {
-            Exam_User u = new Exam_User { UserID=Convert.ToInt32(id), RealName=Name, UserName=uname,Phone=phone};
+            Exam_User u = new Exam_User { UserID= System.Convert.ToInt32(id), RealName= Name, UserName= uname, Phone = phone };
             try
             {
                 StudentMannerService.Update(u);
