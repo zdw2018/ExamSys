@@ -27,6 +27,18 @@ namespace Exam.BLL
             }               
         }
         /// <summary>
+        /// 查询试题规则详情
+        /// </summary>
+        /// <param name="ruleid"></param>
+        /// <returns></returns>
+        public static List<Exam_RuleDetail> GetDetailQuestion(int ruleid)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                return db.Exam_RuleDetail.Where(x => x.PaperRuleID == ruleid).ToList();
+            }
+        }
+        /// <summary>
         /// 添加规则详情
         /// </summary>
         /// <param name="detail"></param>

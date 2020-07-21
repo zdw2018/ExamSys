@@ -43,6 +43,8 @@ namespace Exam.Model
         /// 分值
         /// </summary>
         public int Score { get; set; }
+        public virtual Exam_Library Exam_Library { get; set; }
+        public virtual List<Exam_QuestionOptions> Exam_QuestionOption { get; set; }
       
     }
 }

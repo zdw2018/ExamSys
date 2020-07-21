@@ -102,7 +102,7 @@ namespace Exam.UI.Controllers
             }
 
 
-            return this.JavaScript("alert('添加成功')");
+            return this.JavaScript("<script>alert('添加成功')</script>");
         }
         [HttpPost]
         public ActionResult Add(string libraryname, string libraryremark)

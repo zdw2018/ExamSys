@@ -1,0 +1,93 @@
+﻿@using Exam.Model
+@model List<Exam_Answer>
+@{
+
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<script src="~/Content/Common/frame/layui/lay/modules/laydate.js"></script>
+<div class="larry-fluid larry-wrapper">
+    <div class="layui-row lay-col-space20">
+        <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <section class="larry-body  fadeInRightBig">
+                <div class="larry-body-header" style="text-align:center">
+                    <span class="tit">考试名称—@ViewBag.Rule.RuleName</span>
+                    <br />
+                    <span class="tit">试题总分数—@ViewBag.Rule.Score</span>
+                    <br />
+                    <span class="tit">试题数量—@ViewBag.Rule.QuestionNum</span>
+                    <br />
+                    <span class="tit">开始时间—@ViewBag.Rule.RuleStartDate</span>
+                    <br />
+                    <span class="tit" id="enddate">结束时间—@ViewBag.Rule.RuleEndDate</span>
+                    <br />
+                    <span class="tit">倒计时—@ViewBag.Rule.RuleEndDate</span>
+                </div>
+                <div class="larry-body-content clearfix">
+                    <form class="layui-form" id="form1">
+                        @foreach (var item in Model)
+                        {
+                            <span>第@item.AnswerID题</span>
+                            <blockquote class="layui-elem-quote layui-text">
+                                <p>@item.Exam_Question.QuestionDescribe</p>
+                            </blockquote>
+
+                            @foreach (var item2 in item.Exam_QuestionOptions)
+                            {
+                                <div class="layui-input-block">
+                                    @item2.OptionCode <input type="checkbox" name="like1[write]" lay-skin="primary" title="@item2.OptionDescribe">
+                                </div>
+                            }
+
+                        }
+
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+
+                                @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
+                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>立即修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+
+  layui.use('util', function(){
+  var util = layui.util;
+
+  //示例
+  var endTime = new Date(2099,1,1).getTime() //假设为结束日期
+  ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+  util.countdown(endTime, serverTime, function(date, serverTime, timer){
+    var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+    layui.$('#test').html('距离2099年1月1日还有：'+ str);
+  });
+});
+
+    function Save()
+    {
+
+
+        $.post("@Url.Action("EditPaper", "PaperRule")",$('#form1').serialize(),function(data)
+        {
+            if (data.success) {
+                layer.msg("添加成功");
+                setTimeout(function () {
+                    window.location.href = "/PaperRule/Index";
+                }, 1000);
+            } else {
+                layer.msg("添加失败," + data.msg);
+            }
+        });
+        return false;
+    }
+</script>
+

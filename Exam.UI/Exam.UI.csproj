@@ -542,7 +542,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Exam\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -582,6 +581,8 @@
     <Content Include="Views\QuestionOption\Edit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Main.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\BeginExam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exam.BLL\Exam.BLL.csproj">

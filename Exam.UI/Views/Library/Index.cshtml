@@ -45,7 +45,8 @@
                     <th>添加时间</th>
                     <th>修改时间</th>
                     <th>备注</th>
-                    <th>状态</th>                    
+                    <th>状态</th>
+                    <th>题目数量</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -62,7 +63,7 @@
                         @(item.LibraryStates?"启用":"禁用")
 
                     </td>
-                  
+                    <td>@item.Exam_Question.Count</td>
                     <td>
                         <a onclick="return check_href('/Library/Edit?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
                             <i class="larry-icon larry-bianji4"></i>编辑

@@ -44,5 +44,6 @@ namespace Exam.Model
         /// 状态
         /// </summary>
         public bool States { get; set; }
+        public virtual List<Exam_RuleDetail> Exam_RuleDetail { get; set; }
     }
 }

@@ -48,6 +48,8 @@ namespace Exam.Model
         /// 导航属性
         /// </summary>
         public virtual Exam_User Exam_User { get; set; }
+        public virtual Exam_Question Exam_Question { get; set; }
+        public virtual List<Exam_QuestionOptions> Exam_QuestionOptions { get; set; }
 
     }
 }

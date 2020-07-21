@@ -28,6 +28,7 @@ namespace Exam.Model
         /// 试卷规则编号
         /// </summary>
         public int RuleID { get; set; }
+        public virtual Exam_PaperRule Exam_PaperRule { get; set; }
         /// <summary>
         /// 试卷总分
         /// </summary>

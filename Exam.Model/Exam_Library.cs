@@ -42,6 +42,7 @@ namespace Exam.Model
         /// 题库状态
         /// </summary>
         public bool LibraryStates { get; set; }
+        public virtual List<Exam_Question> Exam_Question { get; set; }
         
     }
 }

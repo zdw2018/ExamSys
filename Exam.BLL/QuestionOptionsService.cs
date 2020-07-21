@@ -7,6 +7,7 @@ using Exam.Model;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using PagedList;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Exam.BLL
 {
@@ -30,7 +31,20 @@ namespace Exam.BLL
             }
                 
         }
-
+        /// <summary>
+        /// 通过选项值 和题目编号获取正确选项编号
+        /// </summary>
+        /// <param name="optioncode"></param>
+        /// <param name="questionID"></param>
+        /// <returns></returns>
+        public static int GetOptionID(string optioncode,int questionID)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+               var data= db.Exam_QuestionOptions.Where(X=>X.OptionCode== optioncode && X.QuestionID==questionID).FirstOrDefault();
+                return data.OptionID;
+            }
+        }
 
         /// <summary>
         /// 批量添加试题
