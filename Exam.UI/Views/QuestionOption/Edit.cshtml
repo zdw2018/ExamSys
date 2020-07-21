@@ -1,0 +1,64 @@
+﻿
+@model Exam.Model.Exam_QuestionOptions
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="larry-fluid larry-wrapper">
+    <div class="layui-row lay-col-space20">
+        <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <section class="larry-body  fadeInRightBig">
+                <div class="larry-body-header">
+                    <span class="tit">修改选项信息</span>
+                </div>
+                <div class="larry-body-content clearfix">
+                    <form class="layui-form" id="form1">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">选项描述</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="optiondescribe" id="txt_optiondescribe" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" value="@Model.OptionDescribe" placeholder="请输入选项描述">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">题库备注</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="optioncode" id="txt_optioncode" aautocomplete="off" class="layui-input larry-input" value="@Model.OptionCode" placeholder="请输入题目选项值例如（A B C D ）">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="hidden" name="id" id="txt_lmid" value="@ViewBag.Optionid" />
+                                @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
+                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>立即提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+
+    function Save()
+    {
+
+
+        $.post("@Url.Action("Edit", "QuestionOption")",$('#form1').serialize(),function(data)
+        {
+            if (data.success) {
+                layer.msg("修改成功");
+                setTimeout(function () {
+                    //top.document.getElementById('tabCtrA').click();
+                    window.location.href = "/QuestionOption/Index?id=@ViewBag.Questionid";
+                }, 1000);
+            } else {
+                layer.msg("修改失败," + data.msg);
+            }
+        });
+        return false;
+    }
+</script>

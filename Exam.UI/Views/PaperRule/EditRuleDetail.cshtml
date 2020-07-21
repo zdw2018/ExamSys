@@ -11,7 +11,7 @@
                     <span class="tit">修改试卷规则详情</span>
                 </div>
                 <div class="larry-body-content clearfix">
-                    <form class="layui-form" id="form1" method="post" action="Lead" enctype="multipart/form-data">
+                    <form class="layui-form" id="form1">
                         <div class="layui-form-item">
                             <label class="layui-form-label">请选择题库</label>
                             <div class="layui-input-block">
@@ -19,7 +19,7 @@
                                     <option value=""></option>
                                     @foreach (var item in Model)
                                     {
-                                        @if (item.LibraryID == ViewBag.data.LibraryID)
+                                        if (item.LibraryID == ViewBag.data.LibraryID)
                                         {
                                             <option selected value="@item.LibraryID">@item.Library_Name</option>
                                         }
@@ -27,7 +27,6 @@
                                         {
                                             <option value="@item.LibraryID">@item.Library_Name</option>
                                         }
-
                                     }
                                 </select>
                             </div>
@@ -40,9 +39,11 @@
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-
+                                <input type="hidden" name="ruleid" value="@ViewBag.data.RuleID" />
+                                <input type="hidden" name="paperruleid" value="@ViewBag.data.PaperRuleID" />
+                                <input type="hidden" name="oldnum" value="@ViewBag.data.QuestionNum" />
                                 @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
-                                <button class="layui-btn larry-btn" lay-filter="submit" lay-submit>立即提交</button>
+                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save();" lay-submit>立即提交</button>
                             </div>
                         </div>
                     </form>
@@ -63,13 +64,13 @@
         $.post("@Url.Action("EditRuleDetail", "PaperRule")",$('#form1').serialize(),function(data)
         {
             if (data.success) {
-                layer.msg("修改成功");
+                layer.msg(data.msg);
                 setTimeout(function () {
                     //top.document.getElementById('tabCtrA').click();
                     window.location.href = "/PaperRule/RuleDetail?id=@ViewBag.data.RuleID";
                 }, 1000);
             } else {
-                layer.msg("添加失败," + data.msg);
+                layer.msg(data.msg);
             }
         });
         return false;

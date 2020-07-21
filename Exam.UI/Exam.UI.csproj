@@ -133,12 +133,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ExamMannageController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaperController.cs" />
     <Compile Include="Controllers\PaperRuleController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\QuestionOptionController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\StudentMannagerController.cs" />
     <Compile Include="Filter\AdminFilter.cs" />
     <Compile Include="Filter\LoginFilter.cs" />
@@ -539,6 +542,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Exam\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -562,7 +566,6 @@
     <Content Include="Views\Library\Index.cshtml" />
     <Content Include="Views\ExamMannage\Index.cshtml" />
     <Content Include="Views\Paper\Index.cshtml" />
-    <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\StudentMannager\Edit.cshtml" />
     <Content Include="Views\Library\Edit.cshtml" />
     <Content Include="Views\Library\Add.cshtml" />
@@ -572,6 +575,13 @@
     <Content Include="Views\PaperRule\AddPaperRule.cshtml" />
     <Content Include="Views\PaperRule\RuleDetail.cshtml" />
     <Content Include="Views\PaperRule\EditRuleDetail.cshtml" />
+    <Content Include="Views\PaperRule\EditPaper.cshtml" />
+    <Content Include="Views\QuestionOption\Index.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\QuestionOption\Edit.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exam.BLL\Exam.BLL.csproj">

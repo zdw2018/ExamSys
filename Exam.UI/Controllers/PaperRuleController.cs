@@ -38,7 +38,10 @@ namespace Exam.UI.Controllers
         }
         public ActionResult RuleDetail(int id)
         {
-            var list = RuleDetailService.GetList();
+            ViewBag.Paper =PaperRuleService.FindPaperRuleByID(id);
+            ViewData["Num"] = RuleDetailService.GetDetailQuestionCount(id).ToString();
+           
+            var list = RuleDetailService.GetList(id);
             return View(list);
         }
         /// <summary>
@@ -53,9 +56,31 @@ namespace Exam.UI.Controllers
             return View(list);
         }
         [HttpPost]
-        public ActionResult EditRuleDetail(int questionnum, int libraryid, int ruleid)
+        public ActionResult EditRuleDetail(int questionnum, int libraryid, int ruleid,int paperruleid,int oldnum)
         {
-            return View();
+            try
+            {
+                ///查询规则详情中 试卷题目数量
+                int num = RuleDetailService.GetDetailQuestionCount(paperruleid);
+                //查询试卷规则 题目总数
+
+                var data = PaperRuleService.FindPaperRuleByID(paperruleid);
+                if (questionnum > data.QuestionNum - num+ oldnum)
+                {
+                    return Json(new { msg = "修改失败,要添加的题目数量大于试卷题目总数", success = false });
+                }
+                else
+                {
+                    Exam_RuleDetail detail = new Exam_RuleDetail { QuestionNum = questionnum, LibraryID = libraryid, PaperRuleID = paperruleid, RuleID=ruleid };
+                    RuleDetailService.Update(detail);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "修改失败" + ex, success = false });
+
+            }
+            return Json(new { msg = "修改成功", success = false });
         }
 
         [HttpPost]
@@ -82,11 +107,47 @@ namespace Exam.UI.Controllers
             }
             return Json(new { msg = "添加成功", success = true });
         }
+        /// <summary>
+        /// 编辑试卷规则
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditPaper(int id)
+        {
+            var list = PaperRuleService.FindPaperRuleByID(id);
+            return View(list);
+        }
+        [HttpPost]
+        public ActionResult EditPaper(int id,string rulename, string rulestarttime, int time, int Score, int questionnum)
+        {
+            try
+            {
+                DateTime dt = Convert.ToDateTime(rulestarttime);
+                Exam_PaperRule paperRule = new Exam_PaperRule
+                {
+                    QuestionNum = questionnum,
+                    RuleStartDate = dt,
+                    RuleEndDate = dt.AddMinutes(time),
+                    RuleName = rulename,
+                    Score = Score,
+                    States = true,
+                    PaperRuleID=id
+                };
+                PaperRuleService.Update(paperRule);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "添加失败" + ex, success = false });
+
+            }
+            return Json(new { msg = "添加成功", success = true });
+        }
         public ActionResult AddPaperRule()
         {
 
             ViewBag.Library = LibraryService.GetAll();
             var list = PaperRuleService.GetAll();
+            
             return View(list);
         }
         [HttpPost]

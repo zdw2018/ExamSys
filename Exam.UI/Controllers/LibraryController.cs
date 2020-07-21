@@ -54,9 +54,8 @@ namespace Exam.UI.Controllers
                         string OptionB = item["OptionB"].ToString();
                         string OptionC = item["OptionC"].ToString();
                         string OptionD = item["OptionD"].ToString();
-
                         Exam_Question q = new Exam_Question { LibraryID = Convert.ToInt32(libraryname), QuestionAnswer = answer, QuestionDescribe = title, QuestionParse = Analyze, Score = 2 };
-                        int id = Exam_QuestionService.Add(q);
+                        int id = QuestionService.Add(q);
                         ///拿到ID继续添加选项
                         List<Exam_QuestionOptions> lists =
                             new List<Exam_QuestionOptions>()

@@ -15,6 +15,7 @@ namespace Exam.UI.Filter
             HttpSessionStateBase session = filterContext.HttpContext.Session;
             if (session[CommonFeild.SessionName] != null)
             {
+               
                 Exam_User user = session[CommonFeild.SessionName] as Exam_User;
                 if (user.UserType == 0)
                 {

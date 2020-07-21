@@ -20,15 +20,7 @@
                 <a class="layui-btn layui-bg-blue" href="/PaperRule/AddPaperRule">添加组卷规则</a>
                 <a class="layui-btn layui-bg-blue" href="/PaperRule/AddPaper">添加试卷</a>
             </div>
-            @*<div class="layui-inline">
-                    <a class="layui-btn layui-bg-pale" data-type="tuijian">推荐文章</a>
-                </div>
-                <div class="layui-inline">
-                    <a class="layui-btn" data-type="shenhe">审核文档</a>
-                </div>
-                <div class="layui-inline">
-                    <a class="layui-btn layui-btn-danger" data-type="del">批量删除</a>
-                </div>*@
+       
         </blockquote>
         <table class="layui-table" lay-skin="line">
 
@@ -65,7 +57,7 @@
 
                     </td>
                     <td>
-                        <a onclick="return check_href('/Library/Edit?id=@item.PaperRuleID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                        <a onclick="return check_href('/PaperRule/EditPaper?id=@item.PaperRuleID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
                             <i class="larry-icon larry-bianji4"></i>编辑
                         </a>
                         @if (item.States)
@@ -80,7 +72,9 @@
                                 <i class="larry-icon larry-ttpodicon"></i>启用用
                             </a>
                         }
-
+                        <a onclick="return check_href('/PaperRule/RuleDetail?id=@item.PaperRuleID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                            <i class="larry-icon larry-bianji4"></i>查看详情
+                        </a>
                     </td>
                 </tr>
                 }

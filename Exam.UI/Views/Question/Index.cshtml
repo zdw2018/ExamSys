@@ -1,17 +1,120 @@
 ﻿
+@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<Exam.Model.Exam_Question>
+
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<div class="larry-fluid larry-wrapper fadeInRightBig">
+    <div class="layui-row lay-col-space15 ">
+        <blockquote class="layui-elem-quote larry-btn">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="questionname" value="" id="search_input" placeholder="文章标题" class="layui-input larry-search-input" style="width:330px;">
+                </div>
+                <a class="layui-btn search_btn" onclick="Search()">搜索</a>
+            </div>
+
+        </blockquote>
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col>
+                <col width="100">
+                <col width="150">
+                <col width="120">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>题目编号</th>
+                    <th>题目描述</th>
+                    <th>题目答案</th>
+                    <th>题目解析</th>
+                    <th>分值</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.QuestionID</td>
+                        <td>@item.QuestionDescribe</td>
+                        <td>@item.QuestionAnswer</td>
+                        <td>@item.QuestionParse</td>
+                        <td>@item.Score</td>
+                        <td>
+                            <a onclick="return check_href('/Question/Edit?questionid=@item.QuestionID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                                <i class="larry-icon larry-bianji4"></i>编辑
+                            </a>
+                            <a onclick="return Disable(@item.QuestionID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                <i class="larry-icon larry-ttpodicon"></i>删除
+                            </a>
+                            <a onclick="return check_href('/QuestionOption/Index?id=@item.QuestionID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                                <i class="larry-icon larry-bianji4"></i>查看详情
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                @if (Model != null && Model.Any() && Model.Count > 1)
+                {
+                    <tr>
+                        <td colspan="4" align="center">
+                            <div style="float:left;width:370px;font-size:12px;height:34px;line-height:34px;">
+                                每页 @Model.PageSize 条记录，共有 @Model.TotalItemCount 条记录。
+                                第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页。
+                                <input type="hidden" name="page" value="1" />
+                                <input id="last" type="hidden" name="page" value="@Model.PageCount" />
+                            </div>
+
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new
+                       {
+                          id = ViewBag.ID,
+                           page,
+                           lmid = ViewBag.Lmid
+                       }), new PagedListRenderOptions()
+                       {
+                           LinkToFirstPageFormat = "首页",
+                           LinkToNextPageFormat = "下一页",
+                           LinkToPreviousPageFormat = "上一页",
+                           LinkToLastPageFormat = "末页",
+                           DisplayItemSliceAndTotal = false,
+                           MaximumPageNumbersToDisplay = 5
+                       })
+                        </td>
+                    </tr>
+                }
+            </tfoot>
+        </table>
     </div>
-</body>
-</html>
+</div>
+<script>
+
+
+    function Search() {
+        $.post("@Url.Action("Index", "Question")", { id:@ViewBag.ID, questionname: $("#search_input").val() })
+
+
+    }
+
+    function Disable(id) {
+        layer.confirm('确认删除吗？删除该题目会将该题目下的所有选项一起删除', {
+            icon: 3, title: '删除确认'
+        }, function (index) {
+            $.post("@Url.Action("DeleteQuestion", "Question")", { id: id }, function (data) {
+                if (data.success) {
+                    window.location.href = window.location.href;
+                }
+                else {
+                    layer.alert(data.msg, { icon: -1 });
+                }
+            }, "json");
+        });
+    }
+
+</script>

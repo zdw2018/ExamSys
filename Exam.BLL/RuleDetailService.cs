@@ -19,10 +19,12 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int GetDetailQuestionCount(int ruleid)
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            int num = db.Exam_RuleDetail.Where(x => x.PaperRuleID == ruleid).Sum(x => x.QuestionNum);
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                int num = db.Exam_RuleDetail.Where(x => x.PaperRuleID == ruleid).Select(x => x.QuestionNum).DefaultIfEmpty().Sum();
 
-            return num;
+                return num;
+            }               
         }
         /// <summary>
         /// 添加规则详情
@@ -31,9 +33,12 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int AddRuleDetail(Exam_RuleDetail detail)
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            db.Exam_RuleDetail.Add(detail);
-            return db.SaveChanges();
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                db.Exam_RuleDetail.Add(detail);
+                return db.SaveChanges();
+            }
+                
         }
         /// <summary>
         /// 删除规则详情
@@ -42,10 +47,13 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int Delete(int detailid)
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            var detai= db.Exam_RuleDetail.Where(x => x.RuleID == detailid).FirstOrDefault();
-            db.Exam_RuleDetail.Remove(detai);
-            return db.SaveChanges();
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var detai = db.Exam_RuleDetail.Where(x => x.RuleID == detailid).FirstOrDefault();
+                db.Exam_RuleDetail.Remove(detai);
+                return db.SaveChanges();
+            }
+               
         }
         /// <summary>
         /// 更新规则详情信息
@@ -54,24 +62,36 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int Update(Exam_RuleDetail detail)
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            var detai = db.Exam_RuleDetail.Where(x => x.RuleID == detail.RuleID).FirstOrDefault();
-            detai.LibraryID = detai.LibraryID;
-            detai.QuestionNum = detai.QuestionNum;
-            return db.SaveChanges();
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+
+                var detai = db.Exam_RuleDetail.Where(x => x.RuleID == detail.RuleID).FirstOrDefault();
+                detai.LibraryID = detai.LibraryID;
+                detai.QuestionNum = detai.QuestionNum;
+                return db.SaveChanges();
+            }
         }
         public static Exam_RuleDetail GetDetailByID(int id)
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            var data = db.Exam_RuleDetail.Where(x => x.RuleID == id).FirstOrDefault();
-            return data;
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var data = db.Exam_RuleDetail.Where(x => x.RuleID == id).FirstOrDefault();
+                return data;
+            }
+               
         }
-        public static IPagedList GetList(int page = 1)
+        public static IPagedList GetList(int id,int page = 1)
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            int pagesize = 10;
-            IPagedList list = db.Exam_RuleDetail.OrderBy(x => x.RuleID).ToPagedList(page, pagesize);
-            return list;
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                int pagesize = 10;
+
+                IPagedList list = db.Exam_RuleDetail.Where(x => x.PaperRuleID == id).OrderBy(x => x.RuleID).ToPagedList(page, pagesize);
+
+
+                return list;
+            }
+                
         }
     }
 }

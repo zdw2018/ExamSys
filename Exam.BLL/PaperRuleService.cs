@@ -19,16 +19,22 @@ namespace Exam.BLL
         /// <returns></returns>
         public static IPagedList GetList(int page = 1)
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            int pagesize = 10;
-            IPagedList list = db.Exam_PaperRule.OrderBy(x => x.PaperRuleID).ToPagedList(page, pagesize);
-            return list;
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                int pagesize = 10;
+                IPagedList list = db.Exam_PaperRule.OrderBy(x => x.PaperRuleID).ToPagedList(page, pagesize);
+                return list;
+            }
+
         }
         public static List<Exam_PaperRule> GetAll()
         {
-            ExamSysDBContext db = new ExamSysDBContext();
-            var list = db.Exam_PaperRule.ToList();
-            return list;
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var list = db.Exam_PaperRule.ToList();
+                return list;
+            }
+
         }
         /// <summary>
         /// 增加试卷
@@ -37,10 +43,14 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int InsertPaperRule(Exam_PaperRule paperRule)
         {
-            ExamSysDBContext dBContext = new ExamSysDBContext();
-            dBContext.Exam_PaperRule.Add(paperRule);
-            return dBContext.SaveChanges();
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                dBContext.Exam_PaperRule.Add(paperRule);
+                return dBContext.SaveChanges();
+            }
+
         }
+
         /// <summary>
         /// 通过ID找到该试卷
         /// </summary>
@@ -48,9 +58,12 @@ namespace Exam.BLL
         /// <returns></returns>
         public static Exam_PaperRule FindPaperRuleByID(int id)
         {
-            ExamSysDBContext dBContext = new ExamSysDBContext();
-            var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == id).FirstOrDefault();
-            return data;
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == id).FirstOrDefault();
+                return data;
+            }
+
         }
         /// <summary>
         /// 禁用试卷
@@ -59,12 +72,13 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int DisablePaperRule(int id)
         {
-            ExamSysDBContext dBContext = new ExamSysDBContext();
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == id).FirstOrDefault();
 
-            var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == id).FirstOrDefault();
-
-            data.States = false;
-            return dBContext.SaveChanges();
+                data.States = false;
+                return dBContext.SaveChanges();
+            }
         }
         /// <summary>
         /// 启用试卷
@@ -73,12 +87,15 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int EnablePaperRule(int id)
         {
-            ExamSysDBContext dBContext = new ExamSysDBContext();
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
 
-            var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == id).FirstOrDefault();
+                var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == id).FirstOrDefault();
 
-            data.States = true;
-            return dBContext.SaveChanges();
+                data.States = true;
+                return dBContext.SaveChanges();
+            }
+
         }
         /// <summary>
         /// 修改试卷信息
@@ -87,15 +104,18 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int Update(Exam_PaperRule paperRule)
         {
-            ExamSysDBContext dBContext = new ExamSysDBContext();
-            var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == paperRule.PaperRuleID).FirstOrDefault();
-            data.RuleName = paperRule.RuleName;
-            data.RuleStartDate = paperRule.RuleStartDate;
-            data.RuleEndDate = paperRule.RuleEndDate;
-            data.Score = paperRule.Score;
-            data.QuestionNum = paperRule.QuestionNum;
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
 
-            return dBContext.SaveChanges();
+                var data = dBContext.Exam_PaperRule.Where(x => x.PaperRuleID == paperRule.PaperRuleID).FirstOrDefault();
+                data.RuleName = paperRule.RuleName;
+                data.RuleStartDate = paperRule.RuleStartDate;
+                data.RuleEndDate = paperRule.RuleEndDate;
+                data.Score = paperRule.Score;
+                data.QuestionNum = paperRule.QuestionNum;
+
+                return dBContext.SaveChanges();
+            }
         }
     }
 }

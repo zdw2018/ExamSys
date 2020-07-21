@@ -18,23 +18,29 @@ namespace Exam.BLL
         /// <returns></returns>
         public static int GetUserNum()
         {
-            ExamSysDBContext dBContext = new ExamSysDBContext();
-            
-            return dBContext.Exam_User.Count();
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                return dBContext.Exam_User.Count();
+            }
+
+              
         }
-        public static Exam_User GetUserNum(string UserName,string Password)
+        public static Exam_User GetUserNum(string UserName, string Password)
         {
-            string pwd = PassWordHelper.GetMD5(Password);
-                 
-            ExamSysDBContext dBContext = new ExamSysDBContext();
-            return dBContext.Exam_User.Where(x => x.UserName == UserName && x.PassWord == pwd).FirstOrDefault();
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                string pwd = PassWordHelper.GetMD5(Password);
+                return dBContext.Exam_User.Where(x => x.UserName == UserName && x.PassWord == pwd).FirstOrDefault();
+            } 
         }
   
         public static int InsertUser(Exam_User user)
         {
-            ExamSysDBContext dBContext = new ExamSysDBContext();
-            dBContext.Exam_User.Add(user);
-            return dBContext.SaveChanges();
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                dBContext.Exam_User.Add(user);
+                return dBContext.SaveChanges();
+            }              
         }
     }
 }

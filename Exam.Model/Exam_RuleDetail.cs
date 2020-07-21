@@ -38,6 +38,7 @@ namespace Exam.Model
         /// 试卷规则编号
         /// </summary>
         public int PaperRuleID { get; set; }
+        
 
     }
 }
