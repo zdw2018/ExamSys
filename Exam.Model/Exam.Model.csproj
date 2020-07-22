@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExamPaperBLL.cs" />
     <Compile Include="Exam_Answer.cs" />
     <Compile Include="Exam_Library.cs" />
     <Compile Include="Exam_Paper.cs" />

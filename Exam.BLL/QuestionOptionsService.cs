@@ -12,8 +12,8 @@ using System.Security.Cryptography.X509Certificates;
 namespace Exam.BLL
 {
     public class QuestionOptionsService
-    {      
-        public static IPagedList GetList(int questionid,int page)
+    {
+        public static IPagedList GetList(int questionid, int page)
         {
             using (ExamSysDBContext db = new ExamSysDBContext())
             {
@@ -29,7 +29,7 @@ namespace Exam.BLL
                 }
                 return list;
             }
-                
+
         }
         /// <summary>
         /// 通过选项值 和题目编号获取正确选项编号
@@ -37,15 +37,21 @@ namespace Exam.BLL
         /// <param name="optioncode"></param>
         /// <param name="questionID"></param>
         /// <returns></returns>
-        public static int GetOptionID(string optioncode,int questionID)
+        public static string GetOptionID(string optioncode, int questionID)
         {
             using (ExamSysDBContext db = new ExamSysDBContext())
             {
-               var data= db.Exam_QuestionOptions.Where(X=>X.OptionCode== optioncode && X.QuestionID==questionID).FirstOrDefault();
-                return data.OptionID;
+                var data = db.Exam_QuestionOptions.Where(X => optioncode.Contains(X.OptionCode) && X.QuestionID == questionID).ToList();
+                string Temp = "";
+                foreach (var item in data)
+                {
+                    Temp += item.OptionID + ",";
+                }
+                string temp2 = Temp.Remove(Temp.Length - 1, 1);
+                return temp2;
             }
+           
         }
-
         /// <summary>
         /// 批量添加试题
         /// </summary>
@@ -57,7 +63,7 @@ namespace Exam.BLL
                 db.Exam_QuestionOptions.AddRange(lists);
                 db.SaveChanges();
             }
-                
+
         }
         /// <summary>
         /// 通过题目编号查询 下面的选项
@@ -70,9 +76,9 @@ namespace Exam.BLL
             {
                 return db.Exam_QuestionOptions.Where(x => x.QuestionID == questionid).ToList();
             }
-             
-        }  
-        
+
+        }
+
         /// <summary>
         /// 根据选项ID获取
         /// </summary>
@@ -84,7 +90,7 @@ namespace Exam.BLL
             {
                 return db.Exam_QuestionOptions.Where(x => x.OptionID == optionid).FirstOrDefault();
             }
-              
+
         }
         /// <summary>
         /// 更新选项
@@ -101,7 +107,7 @@ namespace Exam.BLL
                 data.UpdateTime = DateTime.Now;
                 return db.SaveChanges();
             }
-                
+
 
         }
         public static int Delete(int id)
@@ -112,7 +118,7 @@ namespace Exam.BLL
                 db.Exam_QuestionOptions.Remove(data);
                 return db.SaveChanges();
             }
-                
+
         }
     }
 }

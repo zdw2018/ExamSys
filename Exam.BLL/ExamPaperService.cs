@@ -23,18 +23,33 @@ namespace Exam.BLL
             List<Exam_Question> QuestionList = new List<Exam_Question>();
             //定义组卷详情变量
             List<Exam_RuleDetail> RuledetailList = RuleDetailService.GetDetailQuestion(ruleid);
+            int answercount = 0;
             //查询试卷总题目数量
             int num = PaperRuleService.FindPaperRuleByID(ruleid).QuestionNum;
             //判断试卷信息表是否已经存在,如果不存在需要创建(需要考虑中途退出的同学)
             Exam_Paper paper = CheckPaper(ruleid, UserID);
-            //判断答题卡是否存在信息
-            Exam_Answer answer=AnswerService.
+
+
             if (paper == null)
             {
                 paper = CreatePaper(ruleid, UserID);
-                //生成答题卡
+                //生成答题卡           
+            }
+            //判断答题卡是否存在信息
+            answercount = AnswerService.GetUserQuestionCount(UserID, paper.PaperID);
+            //如果存在的话 将试卷信息加载出来
+            if (answercount == num)
+            {
+                var data = AnswerService.GetAnswer(UserID, paper.PaperID);
+                AnswerList.AddRange(data);
+            }
+            ///如果不存在  随机生成试题
+            else
+            {
                 using (ExamSysDBContext db = new ExamSysDBContext())
                 {
+                    //先将答题卡清空
+                    AnswerService.Clear(UserID, paper.PaperID);
                     //根据规则详情 随机生成试题
                     foreach (var item in RuledetailList)
                     {
@@ -50,13 +65,15 @@ namespace Exam.BLL
                             LibraryID = question.LibraryID,
                             PaperID = paper.PaperID,
                             UserID = UserID,
-                            QuestionID = question.QuestionID,
-                            OptionID =QuestionOptionsService.GetOptionID(question.QuestionAnswer,question.QuestionID)
-
+                            QuestionID = question.QuestionID,                           
+                            OptionID = QuestionOptionsService.GetOptionID(question.QuestionAnswer, question.QuestionID),
                         };
+                                      
                         AnswerList.Add(answer);
                     }
+                    //将答题信息添加到数据库
                     db.Exam_Answer.AddRange(AnswerList);
+                    db.SaveChanges();
                 }
             }
             return AnswerList;

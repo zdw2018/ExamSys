@@ -1,4 +1,5 @@
 ﻿using Exam.BLL;
+using Exam.Model;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,15 @@ namespace Exam.UI.Controllers
         {
             ViewBag.Rule = PaperRuleService.FindPaperRuleByID(ruleid);
             var list = ExamPaperService.GeneratePaper(ruleid, 2);
-            return View(list);
+            //获取questioID数组
+            List<Exam_Question> questionlist = new List<Exam_Question>();
+            foreach (var item in list)
+            {
+                questionlist.Add(QuestionService.GetdataByID(item.QuestionID));
+            }
+           
+
+            return View(questionlist);
         }
         public ActionResult ExamDetail(int ruleid)
         {

@@ -48,10 +48,10 @@ namespace Exam.BLL
         public static Exam_Question GetdataByID(int id)
         {
 
-            using (ExamSysDBContext db = new ExamSysDBContext())
-            {
+            ExamSysDBContext db = new ExamSysDBContext();
+       
                 return db.Exam_Question.Where(x => x.QuestionID == id).FirstOrDefault();
-            }
+         
                 
         }
         /// <summary>

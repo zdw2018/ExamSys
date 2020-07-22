@@ -39,17 +39,15 @@ namespace Exam.Model
         /// <summary>
         /// 试题正确选项编号
         /// </summary>
-        public int OptionID { get; set; }
+        public string OptionID { get; set; }
         /// <summary>
         /// 答题选项编号
         /// </summary>
-        public int AnswerOptionID { get; set; }
+        public string AnswerOptionID { get; set; }
         /// <summary>
         /// 导航属性
         /// </summary>
         public virtual Exam_User Exam_User { get; set; }
-        public virtual Exam_Question Exam_Question { get; set; }
-        public virtual List<Exam_QuestionOptions> Exam_QuestionOptions { get; set; }
 
     }
 }

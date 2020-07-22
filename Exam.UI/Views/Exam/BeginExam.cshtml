@@ -1,7 +1,7 @@
 ﻿@using Exam.Model
-@model List<Exam_Answer>
+@model List<Exam_Question>
 @{
-
+    int num = 1;
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -12,35 +12,36 @@
     <div class="layui-row lay-col-space20">
         <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
             <section class="larry-body  fadeInRightBig">
-                <div class="larry-body-header" style="text-align:center">
-                    <span class="tit">考试名称—@ViewBag.Rule.RuleName</span>
-                    <br />
-                    <span class="tit">试题总分数—@ViewBag.Rule.Score</span>
-                    <br />
-                    <span class="tit">试题数量—@ViewBag.Rule.QuestionNum</span>
-                    <br />
-                    <span class="tit">开始时间—@ViewBag.Rule.RuleStartDate</span>
-                    <br />
-                    <span class="tit" id="enddate">结束时间—@ViewBag.Rule.RuleEndDate</span>
-                    <br />
-                    <span class="tit">倒计时—@ViewBag.Rule.RuleEndDate</span>
+                <div class="larry-body-header" style="text-align:center;height:auto">
+                    <div> <span class="tit">考试名称—@ViewBag.Rule.RuleName</span></div>
+
+                    <div> <span class="tit">试题总分数—@ViewBag.Rule.Score</span></div>
+
+                    <div> <span class="tit">试题数量—@ViewBag.Rule.QuestionNum</span></div>
+
+                    <div> <span class="tit">开始时间—@ViewBag.Rule.RuleStartDate</span></div>
+
+                    <div> <span class="tit" id="enddate">结束时间—@ViewBag.Rule.RuleEndDate</span></div>
+
+                    <div> <span class="tit">倒计时—@ViewBag.Rule.RuleEndDate</span></div>
                 </div>
                 <div class="larry-body-content clearfix">
                     <form class="layui-form" id="form1">
                         @foreach (var item in Model)
                         {
-                            <span>第@item.AnswerID题</span>
+                            <span><span>第</span>@num<span>题</span></span>
                             <blockquote class="layui-elem-quote layui-text">
-                                <p>@item.Exam_Question.QuestionDescribe</p>
+
+                                <p>@item.QuestionDescribe</p>
                             </blockquote>
 
-                            @foreach (var item2 in item.Exam_QuestionOptions)
+                            foreach (var item2 in item.Exam_QuestionOption)
                             {
                                 <div class="layui-input-block">
                                     @item2.OptionCode <input type="checkbox" name="like1[write]" lay-skin="primary" title="@item2.OptionDescribe">
                                 </div>
                             }
-
+                            num++;
                         }
 
 
