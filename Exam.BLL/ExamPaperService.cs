@@ -28,8 +28,6 @@ namespace Exam.BLL
             int num = PaperRuleService.FindPaperRuleByID(ruleid).QuestionNum;
             //判断试卷信息表是否已经存在,如果不存在需要创建(需要考虑中途退出的同学)
             Exam_Paper paper = CheckPaper(ruleid, UserID);
-
-
             if (paper == null)
             {
                 paper = CreatePaper(ruleid, UserID);
@@ -62,13 +60,14 @@ namespace Exam.BLL
 
                         Exam_Answer answer = new Exam_Answer
                         {
+                            AnswerOptionID = "",
                             LibraryID = question.LibraryID,
                             PaperID = paper.PaperID,
                             UserID = UserID,
-                            QuestionID = question.QuestionID,                           
+                            QuestionID = question.QuestionID,
                             OptionID = QuestionOptionsService.GetOptionID(question.QuestionAnswer, question.QuestionID),
                         };
-                                      
+
                         AnswerList.Add(answer);
                     }
                     //将答题信息添加到数据库
@@ -105,7 +104,7 @@ namespace Exam.BLL
             //获取用户信息
             var user = UsersService.GetUserByID(userid);
             //添加试卷规则
-            Exam_Paper paper = new Exam_Paper { RealName = user.RealName, UserID = user.UserID, RuleID = rule.PaperRuleID, TotalScore = rule.Score, UserScore = 0 };
+            Exam_Paper paper = new Exam_Paper { States = false, RealName = user.RealName, UserID = user.UserID, RuleID = rule.PaperRuleID, TotalScore = rule.Score, UserScore = 0 };
             var Newpaper = AddPaper(paper);
             return Newpaper;
 
@@ -122,6 +121,77 @@ namespace Exam.BLL
                 db.Exam_Paper.Add(paper);
                 db.SaveChanges();
                 return paper;
+            }
+        }
+        /// <summary>
+        /// 更新试卷分数
+        /// </summary>
+        /// <param name="paperid"></param>
+        /// <param name="score"></param>
+        public static void UpdateScore(int paperid, int score)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var data = db.Exam_Paper.Where(x => x.PaperID == paperid).FirstOrDefault();
+                data.UserScore = score;
+                db.SaveChanges();
+            }
+        }
+        /// <summary>
+        /// 获取试卷规则编号
+        /// </summary>
+        /// <param name="paperid"></param>
+        /// <returns></returns>
+        public static Exam_Paper GetPaper(int paperid)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var data = db.Exam_Paper.Where(x => x.PaperID == paperid).FirstOrDefault();
+                return data;
+
+            }
+        }
+        /// <summary>
+        /// 获取试卷状态 已提交还是未提交
+        /// </summary>
+        /// <param name="ruleid"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public static bool CkeckScore(int ruleid, int userid)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var data = db.Exam_Paper.Where(x => x.RuleID == ruleid && x.UserID == userid).FirstOrDefault();
+                return data.States;
+
+            }
+        }
+
+        /// <summary>
+        /// 统计成绩信息
+        /// </summary>
+        /// <param name="ruleid"></param>
+        /// <returns></returns>
+        public static ScoreTotleModel GetScoreModel(int ruleid)
+        {
+            ScoreTotleModel score = new ScoreTotleModel();
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                score.MaxScore = db.Exam_Paper.Where(x => x.RuleID == ruleid).Select(x => x.UserScore).Max();
+
+                score.MinScore = db.Exam_Paper.Where(x => x.RuleID == ruleid).Select(x => x.UserScore).Min();
+
+                score.ScoreAvg = db.Exam_Paper.Where(x => x.RuleID == ruleid).Select(x => x.UserScore).Average();
+                score.Score60 = db.Exam_Paper.Where(x => x.RuleID == ruleid && x.UserScore < 60).Count();
+                score.Score6070 = db.Exam_Paper.Where(x => x.RuleID == ruleid && 60 <= x.UserScore && x.UserScore < 70).Count();
+                score.Score7080 = db.Exam_Paper.Where(x => x.RuleID == ruleid && 70 <= x.UserScore && x.UserScore < 80).Count();
+                score.Score8090 = db.Exam_Paper.Where(x => x.RuleID == ruleid && 80 <= x.UserScore && x.UserScore < 90).Count();
+                score.Score90100 = db.Exam_Paper.Where(x => x.RuleID == ruleid && 90 <= x.UserScore && x.UserScore < 100).Count();
+                score.Score100 = db.Exam_Paper.Where(x => x.RuleID == ruleid && 100 <= x.UserScore).Count();
+
+                score.StudentNum = db.Exam_Paper.Where(x => x.RuleID == ruleid).Count();
+                return score;
+
             }
         }
 

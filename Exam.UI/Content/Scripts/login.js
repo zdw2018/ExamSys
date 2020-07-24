@@ -66,7 +66,7 @@ layui.use(['jquery', 'layer', 'form', 'larryMenu'], function () {
                 //window.location.href = '/Backstage/Home/Index';
             }
             else {
-                layer.msg(data.msg, { icon: 2, time: 500 });
+                layer.msg(data.msg, { icon: 2, time: 5000 });
             }
         }, "json");
     

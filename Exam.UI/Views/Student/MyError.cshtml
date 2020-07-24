@@ -1,0 +1,97 @@
+﻿@using Utility
+@using Exam.Model
+@model List<ExamPaperBLL>
+@{
+    var currentuser = Session[CommonFeild.SessionName] as Exam_User;
+    int num = 1;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script src="~/Content/Common/frame/layui/lay/modules/laydate.js"></script>
+<div class="larry-fluid larry-wrapper">
+    <div class="layui-row lay-col-space20">
+        <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <section class="larry-body  fadeInRightBig">
+
+                <div class="layui-form center">
+                 <span>我的错题</span>
+                </div>
+                <div class="larry-body-content clearfix">
+                    <form class="layui-form" id="form1">
+                        @foreach (var item in Model)
+                        {
+                            <blockquote class="layui-elem-quote layui-text">
+
+                                <p><span><span>第</span>@num<span>题</span></span>&nbsp;&nbsp;@item.Exam_Question.QuestionDescribe</p>
+                            </blockquote>
+                            if (item.Exam_Question.QuestionAnswer.Length > 1)
+                            {
+                                foreach (var item2 in item.Exam_Question.Exam_QuestionOption)
+                                {
+
+                                    if (item.AnswerOptionID != null)
+                                    {
+                                        if (item.AnswerOptionID.Contains(item2.OptionID.ToString()))
+                                        {
+                                            <div class="layui-input-block">
+                                                @item2.OptionCode <input type="checkbox" checked name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary" title="@item2.OptionDescribe">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="layui-input-block">
+                                                @item2.OptionCode <input type="checkbox" name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary" title="@item2.OptionDescribe">
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="layui-input-block">
+                                            @item2.OptionCode <input type="checkbox" name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary" title="@item2.OptionDescribe">
+                                        </div>
+                                    }
+
+
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item2 in item.Exam_Question.Exam_QuestionOption)
+                                {
+                                    if (item.AnswerOptionID != null)
+                                    {
+                                        if (item.AnswerOptionID.Contains(item2.OptionID.ToString()))
+                                        {
+                                            <div class="layui-input-block">
+                                                @item2.OptionCode <input type="radio" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" checked lay-skin="primary" title="@item2.OptionDescribe">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="layui-input-block">
+                                                @item2.OptionCode <input type="radio" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" lay-skin="primary" title="@item2.OptionDescribe">
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="layui-input-block">
+                                            @item2.OptionCode <input type="radio" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" lay-skin="primary" title="@item2.OptionDescribe">
+                                        </div>
+                                    }
+
+
+                                }
+                            }
+                            num++;
+                            <div class="layui-input-block">
+                                <span>正确答案：@item.Exam_Question.QuestionAnswer</span>
+                            </div>
+                        }
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+

@@ -7,9 +7,11 @@ using Exam.Model;
 using Exam.BLL;
 using PagedList;
 using Utility;
+using Exam.UI.Filter;
 
 namespace Exam.UI.Controllers
 {
+    [StudentFilter]
     public class StudentMannagerController : Controller
     {
         // GET: StudentMannager
@@ -83,6 +85,46 @@ namespace Exam.UI.Controllers
 
             }
             return Json(new { msg = "修改成功", success = true });
+        }
+
+
+        /// <summary>
+        /// 禁用账号
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Disable(int id)
+        {
+            try
+            {
+                StudentMannerService.Disable(id);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "禁用失败" + ex, success = false });
+
+            }
+            return Json(new { msg = "禁用成功", success = true });
+
+        }
+
+        /// <summary>
+        /// 启用账号
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Enable(int id)
+        {
+            try
+            {
+                StudentMannerService.Enable(id);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "启用失败" + ex, success = false });
+
+            }
+            return Json(new { msg = "启用成功", success = true });
 
         }
     }

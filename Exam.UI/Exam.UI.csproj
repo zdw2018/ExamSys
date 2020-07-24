@@ -137,7 +137,6 @@
     <Compile Include="Controllers\ExamMannageController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\PaperController.cs" />
     <Compile Include="Controllers\PaperRuleController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionOptionController.cs" />
@@ -413,6 +412,7 @@
     <Content Include="js\demo\sparkline-demo.min.js" />
     <Content Include="js\demo\treeview-demo.min.js" />
     <Content Include="js\demo\webuploader-demo.min.js" />
+    <Content Include="js\echarts.min.js" />
     <Content Include="js\hplus.min.js" />
     <Content Include="js\jquery-ui-1.10.4.min.js" />
     <Content Include="js\jquery-ui.custom.min.js" />
@@ -583,6 +583,11 @@
     <Content Include="Views\Student\Main.cshtml" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\BeginExam.cshtml" />
+    <Content Include="Views\Exam\ExamDetail.cshtml" />
+    <Content Include="Views\Student\MyInfo.cshtml" />
+    <Content Include="Views\Student\MyError.cshtml" />
+    <Content Include="Views\ExamMannage\Totle.cshtml" />
+    <Content Include="Views\ExamMannage\ErrorQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exam.BLL\Exam.BLL.csproj">

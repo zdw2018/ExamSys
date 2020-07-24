@@ -28,10 +28,10 @@ namespace Exam.UI.Filter
             if (session[CommonFeild.SessionName] != null)
             {
                 Exam_User user = filterContext.HttpContext.Session[CommonFeild.SessionName] as Exam_User;
-                //如果是学生进入相关页面 返回到学生的主页面
-                if (user.UserType == 0)
+                //如果是老师进入相关页面 返回到学生的主页面
+                if (user.UserType == 1)
                 {
-                    filterContext.Result = new RedirectResult("~/Exam/Index");
+                    filterContext.Result = new RedirectResult("~/Admin/Index");
                 }
 
             }

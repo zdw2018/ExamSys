@@ -1,0 +1,67 @@
+﻿
+@using PagedList
+@using PagedList.Mvc
+@using Exam.Model
+@model ScoreTotleModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <script src="~/js/echarts.min.js"></script>
+<div class="larry-fluid larry-wrapper fadeInRightBig">
+    <div class="layui-row lay-col-space15 ">
+        <table class="layui-table" lay-skin="line">
+           
+            <caption> <span class="tit">试卷名称：@ViewBag.Info.RuleName 总分：@ViewBag.Info.Score 总人数： @Model.StudentNum</span></caption>
+            <colgroup>
+                <col>
+                <col width="100">
+                <col width="120">
+                <col width="150">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>最高分</th>
+                    <th>最低分</th>
+                    <th>平均分</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.MaxScore</td>
+                    <td>@Model.MinScore</td>
+                    <td>@Model.ScoreAvg</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="main" class="center" style="width: 600px;height:400px;"></div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '@ViewBag.Info.RuleName 分数段统计图'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['人数']
+                },
+                xAxis: {
+                    data: ["60分以下", "60-70", "70-80", "80-90", "90-100", "100及以上"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '人数',
+                    type: 'bar',
+                    data: [@Model.Score60,@Model.Score6070,@Model.Score7080,@Model.Score8090,@Model.Score90100,@Model.Score100]
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+    </div>
+</div>

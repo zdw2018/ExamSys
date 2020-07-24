@@ -46,6 +46,10 @@ namespace Exam.Model
         /// 导航属性
         /// </summary>
         public virtual Exam_User Exam_User { get; set; }
+        /// <summary>
+        /// 试卷状态  0 未提交 1 已经提交
+        /// </summary>
+        public bool States { get; set; }
 
     }
 }

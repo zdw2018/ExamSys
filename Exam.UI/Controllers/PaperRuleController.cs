@@ -1,5 +1,6 @@
 ﻿using Exam.BLL;
 using Exam.Model;
+using Exam.UI.Filter;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Exam.UI.Controllers
 {
+    [StudentFilter]
     public class PaperRuleController : Controller
     {
         // GET: PaperRule
@@ -145,7 +147,7 @@ namespace Exam.UI.Controllers
         public ActionResult AddPaperRule()
         {
 
-            ViewBag.Library = LibraryService.GetAll();
+            ViewBag.Library = LibraryService.GetAllEnable();
             var list = PaperRuleService.GetAll();
             
             return View(list);

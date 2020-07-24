@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿
+@using Utility;
+@{
+    var user = Session[CommonFeild.SessionName] as Exam.Model.Exam_User;
+}
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -35,8 +40,8 @@
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                                    <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                    <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                    <span class="block m-t-xs"><strong class="font-bold">@user.RealName</strong></span>
+                                    <span class="text-muted text-xs block">学生<b class="caret"></b></span>
                                 </span>
                             </a>
                         </div>
@@ -50,7 +55,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="/Student/Index">
+                        <a class="J_menuItem" href="/Student/MyInfo">
                             <i class="fa fa-users"></i>
                             <span class="nav-label">我的信息</span>
                         </a>
@@ -63,13 +68,13 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="/MyPaper/Index">
-                            <i class="fa fa-sticky-note-o"></i> 、
+                        <a class="J_menuItem" href="/Student/MyError">
+                            <i class="fa fa-sticky-note-o"></i> 
                             <span class="nav-label">我的错题</span>
                         </a>
 
                     </li>
-                  
+
                 </ul>
             </div>
         </nav>

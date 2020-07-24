@@ -19,13 +19,13 @@ namespace Exam.UI.Filter
             //}
 
             var session = filterContext.HttpContext.Session;
-            if (session["LoginInfo"] != null)
+            if (session[CommonFeild.SessionName] != null)
             {
                 Exam_User user = session[CommonFeild.SessionName] as Exam_User;
                 //如果是学生进入相关页面 返回到学生的主页面
                 if (user.UserType == 0)
                 {
-                    filterContext.Result = new RedirectResult("~/Exam/Index");
+                    filterContext.Result = new RedirectResult("~/Student/Index");
                 }
 
             }

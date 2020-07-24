@@ -9,9 +9,11 @@ using Exam.Model;
 using Utility;
 using System.IO;
 using System.Data;
+using Exam.UI.Filter;
 
 namespace Exam.UI.Controllers
 {
+    [StudentFilter]
     public class LibraryController : Controller
     {
         // GET: Library
@@ -27,11 +29,11 @@ namespace Exam.UI.Controllers
 
         public ActionResult Lead()
         {
-            var list = LibraryService.GetAll();
+            var list = LibraryService.GetAllEnable();
             return View(list);
         }
         [HttpPost]
-        public JavaScriptResult Lead(string libraryname, HttpPostedFileBase excelname)
+        public ContentResult Lead(string libraryname, HttpPostedFileBase excelname)
         {
             try
             {
@@ -98,11 +100,10 @@ namespace Exam.UI.Controllers
             catch (Exception ex)
             {
 
-                return JavaScript("<script>layer.msg('添加失败')</script>");
+
+                return Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加失败'"+ex+");window.loaction.href='/Library/Index'})</script>");
             }
-
-
-            return this.JavaScript("<script>alert('添加成功')</script>");
+            return this.Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加成功');window.loaction.href='/Library/Index'})</script>");
         }
         [HttpPost]
         public ActionResult Add(string libraryname, string libraryremark)
@@ -164,6 +165,26 @@ namespace Exam.UI.Controllers
 
             }
             return Json(new { msg = "禁用成功", success = true });
+
+        }
+
+        /// <summary>
+        /// 启用题库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Enable(int id)
+        {
+            try
+            {
+                int res = LibraryService.DisableLibrary(id);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = "启用失败" + ex, success = false });
+
+            }
+            return Json(new { msg = "启用成功", success = true });
 
         }
     }

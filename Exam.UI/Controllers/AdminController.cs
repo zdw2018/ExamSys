@@ -7,16 +7,13 @@ using Exam.UI.Filter;
 using Utility;
 namespace Exam.UI.Controllers
 {
+    [StudentFilter]
     public class AdminController : Controller
     {
         // GET: Admin
-        //[StudentFilter]
+        
         public ActionResult Index()
-        {
-
-            //var s = SessionHelper.GetSession(CommonFeild.SessionName);
-            //var s = Session[CommonFeild.SessionName];
-       
+        {              
             return View();
         }
         public ActionResult Main()

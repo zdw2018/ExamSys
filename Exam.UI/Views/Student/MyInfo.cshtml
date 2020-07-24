@@ -1,39 +1,40 @@
-﻿@{
+﻿@model Exam.Model.Exam_User
+@{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
-<script>
-
-    layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg("dsjkfghskdjg");})
-
-</script>
 <div class="larry-fluid larry-wrapper">
     <div class="layui-row lay-col-space20">
         <div class="layui-cos-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
             <section class="larry-body  fadeInRightBig">
                 <div class="larry-body-header">
-                    <span class="tit">添加题库</span>
+                    <span class="tit">个人信息修改</span>
                 </div>
                 <div class="larry-body-content clearfix">
                     <form class="layui-form" id="form1">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">题库名称</label>
+                            <label class="layui-form-label">用户名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="libraryname" id="txt_libraryname" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" placeholder="题库名称">
+                                <input type="text" name="uname" id="txt_UserName" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" value="@Model.UserName" placeholder="请输入用户名">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">题库备注</label>
+                            <label class="layui-form-label">姓名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="libraryremark" id="txt_libraryremark" aautocomplete="off" class="layui-input larry-input" placeholder="请输入题库备注">
+                                <input type="text" name="Name" id="txt_RealName" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" value="@Model.RealName" placeholder="请输入姓名">
                             </div>
                         </div>
-
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="phone" id="txt_Phone" required lay-verify="required" aautocomplete="off" class="layui-input larry-input" value="@Model.Phone" placeholder="请输入手机号">
+                            </div>
+                        </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-
+                                <input type="hidden" name="id" id="txt_lmid" value="@Model.UserID" />
                                 @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
                                 <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>立即提交</button>
                             </div>
@@ -48,21 +49,18 @@
 
     function Save()
     {
-
-
-        $.post("@Url.Action("Add", "Library")",$('#form1').serialize(),function(data)
+        $.post("@Url.Action("Edit", "Student")",$('#form1').serialize(),function(data)
         {
             if (data.success) {
-                layer.msg("添加成功");
+                layer.msg(data.msg);
                 setTimeout(function () {
                     //top.document.getElementById('tabCtrA').click();
-                    window.location.href = "/Library/Index";
+                    window.location.href = "/Student/Index";
                 }, 1000);
             } else {
-                layer.msg("添加失败," + data.msg);
+                layer.msg(data.msg);
             }
         });
         return false;
     }
 </script>
-

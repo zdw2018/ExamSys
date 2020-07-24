@@ -66,5 +66,24 @@ namespace Exam.BLL
                 return dBContext.SaveChanges();
             }                
         }
+
+        public static void Enable(int id)
+        {
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                var data = dBContext.Exam_User.Where(x => x.UserID == id).FirstOrDefault();
+                data.States = true;
+                dBContext.SaveChanges();
+            }
+        }
+        public static void Disable(int id)
+        {
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+                var data = dBContext.Exam_User.Where(x => x.UserID == id).FirstOrDefault();
+                data.States = false;
+                dBContext.SaveChanges();
+            }
+        }
     }
 }

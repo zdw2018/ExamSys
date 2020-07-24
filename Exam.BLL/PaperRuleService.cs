@@ -27,6 +27,23 @@ namespace Exam.BLL
             }
 
         }
+
+        /// <summary>
+        /// 获取所有试卷 状态正常的
+        /// </summary>
+        /// <param name="lmid"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public static IPagedList GetListEnable(int page = 1)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                int pagesize = 10;
+                IPagedList list = db.Exam_PaperRule.Where(x=>x.States==true).OrderBy(x => x.PaperRuleID).ToPagedList(page, pagesize);
+                return list;
+            }
+
+        }
         public static List<Exam_PaperRule> GetAll()
         {
             using (ExamSysDBContext db = new ExamSysDBContext())

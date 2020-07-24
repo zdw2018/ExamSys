@@ -1,9 +1,14 @@
 ﻿@using PagedList
 @using PagedList.Mvc
 @using Exam.Model
+@using Utility
+@using Exam.BLL;
 @model IPagedList<Exam_PaperRule>
 
 @{
+    var currentuser = Session[CommonFeild.SessionName] as Exam_User;
+
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -57,7 +62,7 @@
 
                         </td>
                         <td>
-                            @if (item.RuleEndDate > DateTime.Now)
+                            @if (item.RuleEndDate > DateTime.Now&&!ExamPaperService.CkeckScore(item.PaperRuleID,currentuser.UserID))
                             {
                                 <a onclick="return check_href('/Exam/BeginExam?ruleid=@item.PaperRuleID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
                                     <i class="larry-icon larry-bianji4"></i>参加考试

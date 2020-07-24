@@ -68,9 +68,19 @@
                         <a onclick="return check_href('/Library/Edit?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
                             <i class="larry-icon larry-bianji4"></i>编辑
                         </a>
-                        <a onclick="return Disable(@item.LibraryID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
-                            <i class="larry-icon larry-ttpodicon"></i>禁用
-                        </a>
+                        @if (item.LibraryStates)
+                        {
+                            <a onclick="return Disable(@item.LibraryID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                <i class="larry-icon larry-ttpodicon"></i>禁用
+                            </a>
+                        }
+                        else
+                        {
+                            <a onclick="return Enable(@item.LibraryID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                <i class="larry-icon larry-ttpodicon"></i>启用
+                            </a>
+                        }
+
                         <a onclick="return check_href('/Question/Index?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
                             <i class="larry-icon larry-bianji4"></i>查看详情
                         </a>
@@ -124,6 +134,20 @@
                 }
             }, "json");
         });
-    }
+    };
 
+       function Disable(id) {
+        layer.confirm('确认启用吗？', {
+            icon: 3, title: '启用确认'
+        }, function (index) {
+            $.post("@Url.Action("Enable", "Library")", { id: id }, function (data) {
+                if (data.success) {
+                    window.location.href = window.location.href;
+                }
+                else {
+                    layer.alert(data.msg, { icon: -1 });
+                }
+            }, "json");
+        });
+    }
 </script>

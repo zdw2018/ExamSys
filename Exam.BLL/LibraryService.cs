@@ -24,10 +24,25 @@ namespace Exam.BLL
             IPagedList list = db.Exam_Library.OrderBy(x => x.LibraryID).ToPagedList(page, pagesize);
             return list;
         }
+        /// <summary>
+        /// 加载题库
+        /// </summary>
+        /// <returns></returns>
         public static List<Exam_Library> GetAll()
         {
             ExamSysDBContext db = new ExamSysDBContext();
             var list = db.Exam_Library.ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// 加载题库中未禁用的
+        /// </summary>
+        /// <returns></returns>
+        public static List<Exam_Library> GetAllEnable()
+        {
+            ExamSysDBContext db = new ExamSysDBContext();
+            var list = db.Exam_Library.Where(x => x.LibraryStates == true).ToList();
             return list;
         }
         /// <summary>
@@ -64,6 +79,20 @@ namespace Exam.BLL
             var data = dBContext.Exam_Library.Where(x => x.LibraryID == id).FirstOrDefault();
 
             data.LibraryStates = false;
+            return dBContext.SaveChanges();
+        }
+        /// <summary>
+        /// 启用
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int EnableLibrary(int id)
+        {
+            ExamSysDBContext dBContext = new ExamSysDBContext();
+
+            var data = dBContext.Exam_Library.Where(x => x.LibraryID == id).FirstOrDefault();
+
+            data.LibraryStates = true;
             return dBContext.SaveChanges();
         }
         /// <summary>

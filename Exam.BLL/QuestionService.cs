@@ -102,6 +102,19 @@ namespace Exam.BLL
             }
                 
         }
+        /// <summary>
+        /// 获得题目的分值
+        /// </summary>
+        /// <param name="questionid"></param>
+        /// <returns></returns>
+        public static int GetScore(int questionid)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var data = db.Exam_Question.Where(x => x.QuestionID == questionid).FirstOrDefault();
+                return data.Score;
+            }
+        }
 
     }
 }

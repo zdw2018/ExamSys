@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Utility;
+@{
+    var user = Session[CommonFeild.SessionName] as Exam.Model.Exam_User;
+}
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -35,7 +39,7 @@
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                                    <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
+                                    <span class="block m-t-xs"><strong class="font-bold">@user.RealName</strong></span>
                                     <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
                                 </span>
                             </a>
@@ -72,7 +76,7 @@
                         <a class="J_menuItem" href="/PaperRule/Index"><i class="fa fa-edit"></i> <span class="nav-label">试卷管理</span></a>
                     <li>
                     <li>
-                        <a class="J_menuItem" href="/ExamMannage/Index"><i class="fa fa-desktop"></i> <span class="nav-label">考试管理</span></a>
+                        <a class="J_menuItem" href="/ExamMannage/Index"><i class="fa fa-desktop"></i> <span class="nav-label">分数统计</span></a>
                 </ul>
             </div>
         </nav>

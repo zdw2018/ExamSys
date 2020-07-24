@@ -24,7 +24,19 @@ namespace Exam.BLL
                 return count;
             }
         }
-
+        /// <summary>
+        /// 获取用户错题
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public static List<Exam_Answer> GetError(int userid)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var data = db.Exam_Answer.Where(x => x.UserID == userid && x.AnswerOptionID != "" && x.AnswerOptionID != x.OptionID).ToList();
+                return data;
+            }
+        }
         /// <summary>
         /// 加载答题卡信息
         /// </summary>
@@ -52,6 +64,45 @@ namespace Exam.BLL
                 db.Exam_Answer.RemoveRange(list);
                 db.SaveChanges();
             }
+        }
+
+        /// <summary>
+        /// 保存答题内容
+        /// </summary>
+        /// <param name="answer"></param>
+        public static void Update(Exam_Answer answer)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                var data = db.Exam_Answer.Where(x => x.AnswerID == answer.AnswerID).FirstOrDefault();
+                data.AnswerOptionID = answer.AnswerOptionID;
+                db.SaveChanges();
+            }
+        }
+        /// <summary>
+        /// 评分
+        /// </summary>
+        /// <param name="paperID"></param>
+        public static void GetScore(int paperID, int userid)
+        {
+            int Score = 0;
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                //更新试卷状态为已提交
+                var data = db.Exam_Paper.Where(x => x.PaperID == paperID).FirstOrDefault();
+                data.States = true;
+                var list = db.Exam_Answer.Where(x => x.PaperID == paperID && x.UserID == userid).ToList();
+
+                foreach (var item in list)
+                {
+                    if (item.OptionID == item.AnswerOptionID)
+                    {
+                        Score += QuestionService.GetScore(item.QuestionID);
+                    }
+                }
+            }
+            //将得分写入试卷表
+            ExamPaperService.UpdateScore(paperID, Score);
         }
 
     }

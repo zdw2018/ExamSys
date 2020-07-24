@@ -1,5 +1,6 @@
 ﻿using Exam.BLL;
 using Exam.Model;
+using Exam.UI.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Exam.UI.Controllers
 {
+    [StudentFilter]
     public class QuestionController : Controller
     {
         public ActionResult Index(int id = 0, int page = 1)
