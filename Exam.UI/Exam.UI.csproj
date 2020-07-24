@@ -588,6 +588,7 @@
     <Content Include="Views\Student\MyError.cshtml" />
     <Content Include="Views\ExamMannage\Totle.cshtml" />
     <Content Include="Views\ExamMannage\ErrorQuestion.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exam.BLL\Exam.BLL.csproj">

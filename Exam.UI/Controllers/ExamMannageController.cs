@@ -10,7 +10,7 @@ using Exam.Model;
 
 namespace Exam.UI.Controllers
 {
-    //[StudentFilter]
+    [StudentFilter]
     public class ExamMannageController : Controller
     {
         // GET: ExamMannage
