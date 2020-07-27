@@ -16,7 +16,9 @@ namespace Exam.UI.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            return View();
+            var name = Session[CommonFeild.SessionName] as Exam_User;
+
+            return View(name);
         }
         public ActionResult Main()
         {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Exam.Model;
 using Exam.DAL;
 using PagedList;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Exam.BLL
 {
@@ -56,6 +57,29 @@ namespace Exam.BLL
             dBContext.Exam_Library.Add(library);
             return dBContext.SaveChanges();
         }
+        /// <summary>
+        /// 判断题库名称是否存在
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool GetNameCount(string name)
+        {
+            using (ExamSysDBContext dBContext = new ExamSysDBContext())
+            {
+               int res= dBContext.Exam_Library.Where(x => x.Library_Name == name).Count();
+                if(res>0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                    
+            }
+        }
+
+
         /// <summary>
         /// 通过ID找到该题库
         /// </summary>

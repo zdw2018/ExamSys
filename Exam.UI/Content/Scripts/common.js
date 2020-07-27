@@ -1,5 +1,5 @@
 layui.config({
-    base: '/Areas/Backstage/Content/common/lib/'
+    base: '/Content/common/lib/'
 });
 layui.use(['jquery','layer','element','common','larryMenu','form'],function(){
 	var $ = layui.$,

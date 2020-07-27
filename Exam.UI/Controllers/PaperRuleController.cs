@@ -157,6 +157,8 @@ namespace Exam.UI.Controllers
         {
             try
             {
+                int libraryquestionnum = QuestionService.GetCountByLibraryID(libraryid);
+
                 ///查询规则详情中 试卷题目数量
                 int num = RuleDetailService.GetDetailQuestionCount(paperruleid);
                 //查询试卷规则 题目总数
@@ -165,6 +167,10 @@ namespace Exam.UI.Controllers
                 if (questionnum > data.QuestionNum - num)
                 {
                     return Json(new { msg = "添加失败,要添加的题目数量大于试卷题目总数", success = false });
+                }
+                else if(libraryquestionnum < questionnum)
+                {
+                    return Json(new { msg = "添加失败,题库中的题目数量小于您输入的数量", success = false });
                 }
                 else
                 {
@@ -177,7 +183,7 @@ namespace Exam.UI.Controllers
                 return Json(new { msg = "添加失败" + ex, success = false });
 
             }
-            return Json(new { msg = "添加成功", success = false });
+            return Json(new { msg = "添加成功", success = true });
         }
 
         /// <summary>

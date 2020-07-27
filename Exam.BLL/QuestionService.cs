@@ -43,16 +43,16 @@ namespace Exam.BLL
                 }
                 return list;
             }
-              
+
         }
         public static Exam_Question GetdataByID(int id)
         {
 
             ExamSysDBContext db = new ExamSysDBContext();
-       
-                return db.Exam_Question.Where(x => x.QuestionID == id).FirstOrDefault();
-         
-                
+
+            return db.Exam_Question.Where(x => x.QuestionID == id).FirstOrDefault();
+
+
         }
         /// <summary>
         /// 添加试题
@@ -67,7 +67,7 @@ namespace Exam.BLL
                 db.SaveChanges();
                 return question.QuestionID;
             }
-               
+
         }
         /// <summary>
         /// 更新试题信息
@@ -85,7 +85,24 @@ namespace Exam.BLL
                 data.QuestionDescribe = question.QuestionDescribe;
                 return db.SaveChanges();
             }
-               
+
+        }
+
+        public static int GetCountByLibraryID(int id)
+        {
+            using (ExamSysDBContext db = new ExamSysDBContext())
+            {
+                //删除当前题目下所有选项
+                var list = db.Exam_Question.Where(x => x.LibraryID == id);
+                if(list==null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return list.Count();
+                }
+            }
         }
         public static int Delete(int id)
         {
@@ -100,7 +117,7 @@ namespace Exam.BLL
                 db.Exam_Question.Remove(data);
                 return db.SaveChanges();
             }
-                
+
         }
         /// <summary>
         /// 获得题目的分值

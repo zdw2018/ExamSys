@@ -162,8 +162,14 @@ namespace Exam.BLL
             using (ExamSysDBContext db = new ExamSysDBContext())
             {
                 var data = db.Exam_Paper.Where(x => x.RuleID == ruleid && x.UserID == userid).FirstOrDefault();
-                return data.States;
-
+                if(data==null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return data.States;
+                }               
             }
         }
 

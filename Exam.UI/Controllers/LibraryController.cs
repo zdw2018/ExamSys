@@ -41,7 +41,7 @@ namespace Exam.UI.Controllers
                 {
                     var fileName = Path.GetFileName(excelname.FileName);
 
-                    var path = Path.Combine(Server.MapPath("~/Content/ExcelTemp"), fileName);
+                    var path = Server.MapPath("~/Content/ExcelTemp/")+ fileName;
                     excelname.SaveAs(path);
                     DataTable dt = Utility.Converter.ExcelToDataSet(path);
                     foreach (DataRow item in dt.Rows)
@@ -99,25 +99,30 @@ namespace Exam.UI.Controllers
             }
             catch (Exception ex)
             {
+                //return Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加失败'" + ex + ");window.location.href='/Library/Index'})</script>");
 
+                return this.Content($"<script>alert('{ex}')</script>");
 
-                return Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加失败'"+ex+");window.loaction.href='/Library/Index'})</script>");
             }
-            return this.Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加成功');window.loaction.href='/Library/Index'})</script>");
+            return this.Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加成功');window.location.href='/Library/Index'})</script>");
         }
         [HttpPost]
         public ActionResult Add(string libraryname, string libraryremark)
         {
-            Exam_Library library = new Exam_Library()
-            {
-                CreatTime = DateTime.Now,
-                UpdateTime = DateTime.Now,
-                Library_Remark = libraryremark,
-                Library_Name = libraryname,
-                LibraryStates = true
-            };
             try
             {
+                if (LibraryService.GetNameCount(libraryname))
+                {
+                    return Json(new { msg = "添加失败已经存在相同名称的题库" + libraryname, success = false });
+                }
+                Exam_Library library = new Exam_Library()
+                {
+                    CreatTime = DateTime.Now,
+                    UpdateTime = DateTime.Now,
+                    Library_Remark = libraryremark,
+                    Library_Name = libraryname,
+                    LibraryStates = true
+                };
                 int res = LibraryService.InsertLibrary(library);
             }
             catch (Exception ex)
@@ -177,7 +182,7 @@ namespace Exam.UI.Controllers
         {
             try
             {
-                int res = LibraryService.DisableLibrary(id);
+                int res = LibraryService.EnableLibrary(id);
             }
             catch (Exception ex)
             {

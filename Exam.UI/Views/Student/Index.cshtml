@@ -1,8 +1,4 @@
-﻿
-@using Utility;
-@{
-    var user = Session[CommonFeild.SessionName] as Exam.Model.Exam_User;
-}
+﻿@model Exam.Model.Exam_User
 <!DOCTYPE html>
 <html>
 
@@ -12,9 +8,6 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <title>在线笔试系统 - 主页</title>
-    <!--[if lt IE 8]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
 
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -40,7 +33,7 @@
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                                    <span class="block m-t-xs"><strong class="font-bold">@user.RealName</strong></span>
+                                    <span class="block m-t-xs"><strong class="font-bold">@Model.RealName</strong></span>
                                     <span class="text-muted text-xs block">学生<b class="caret"></b></span>
                                 </span>
                             </a>
@@ -48,7 +41,7 @@
 
                     </li>
                     <li>
-                        <a class="J_menuItem" href="/Admin/Main">
+                        <a class="J_menuItem" href="#">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
 

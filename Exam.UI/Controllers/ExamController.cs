@@ -21,6 +21,8 @@ namespace Exam.UI.Controllers
         // GET: Exam
         public ActionResult Index(int page = 1)
         {
+            var currentuser = Session[CommonFeild.SessionName] as Exam_User;
+            ViewBag.ID = currentuser.UserID;
             IPagedList list = PaperRuleService.GetListEnable(page);
             return View(list);
         }
@@ -30,13 +32,14 @@ namespace Exam.UI.Controllers
         /// <param name="ruleid"></param>
         /// <returns></returns>
         public ActionResult BeginExam(int ruleid)
-        {
-           
-
+        {          
             var currentuser = Session[CommonFeild.SessionName] as Exam_User;
-            ViewBag.Rule = PaperRuleService.FindPaperRuleByID(ruleid);
+            ViewBag.Rule = PaperRuleService.FindPaperRuleByID(ruleid);            
             var list = ExamPaperService.GeneratePaper(ruleid, currentuser.UserID);
-            listanswer.Add(currentuser.UserID, list);
+            if(!listanswer.ContainsKey(currentuser.UserID))
+            {
+                listanswer.Add(currentuser.UserID, list);
+            }           
             //获取questioID数组
             List<Exam_Question> questionlist = new List<Exam_Question>();
             List<ExamPaperBLL> paperbll = new List<ExamPaperBLL>();
@@ -133,11 +136,21 @@ namespace Exam.UI.Controllers
             catch (Exception ex)
             {
 
-                return Json(new { data = false, msg = "保存失败" + ex });
+                return Json(new { success = false, msg = "保存失败" + ex });
             }
-            return Json(new { data = true, msg = "保存成功" });
+            return Json(new { success = true, msg = "保存成功"});
 
         }
+        [HttpPost]
+        public ActionResult GetCount()
+        {
+            var currentuser = Session[CommonFeild.SessionName] as Exam_User;
+            int count = listanswer[currentuser.UserID].Where(x => x.AnswerOptionID == "").Count();
+            
+            return Json(new { success = true,num=count });
+
+        }
+
         /// <summary>
         /// 提交
         /// </summary>
@@ -169,9 +182,9 @@ namespace Exam.UI.Controllers
             catch (Exception ex)
             {
 
-                return Json(new { data = false, msg = "提交失败" + ex });
+                return Json(new { success = false, msg = "提交失败" + ex });
             }
-            return Json(new { data = true, msg = "提交成功" });
+            return Json(new { success = true, msg = "提交成功" });
         }
         /// <summary>
         /// 试卷详情

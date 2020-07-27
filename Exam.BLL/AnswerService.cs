@@ -100,6 +100,7 @@ namespace Exam.BLL
                         Score += QuestionService.GetScore(item.QuestionID);
                     }
                 }
+                db.SaveChanges();
             }
             //将得分写入试卷表
             ExamPaperService.UpdateScore(paperID, Score);

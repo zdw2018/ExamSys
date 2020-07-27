@@ -3,7 +3,7 @@
 
 @model IPagedList<Exam.Model.Exam_User>
 
-@{   
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -51,38 +51,38 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>@item.UserID</td>
-                    <td>@item.UserName</td>
-                    <td>@item.RealName</td>
-                    <td>@item.Phone</td>
-                    <td>
-                       @(item.States?"已认证":"未认证")
-                      
-                    </td>
-                    <td>@item.CreateTime</td>
-                    <td>@item.CreateName</td>
-                    <td>
-                        <a onclick="return check_href('/StudentMannager/Edit?id=@item.UserID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
-                            <i class="larry-icon larry-bianji4"></i>编辑
-                        </a>
-                        <a onclick="return Del(@item.UserID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
-                            <i class="larry-icon larry-ttpodicon"></i>删除
-                        </a>
-                        @if (item.States)
-                        {
-                            <a onclick="return Disable(@item.UserID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
-                                <i class="larry-icon larry-ttpodicon"></i>禁用
+                    <tr>
+                        <td>@item.UserID</td>
+                        <td>@item.UserName</td>
+                        <td>@item.RealName</td>
+                        <td>@item.Phone</td>
+                        <td>
+                            @(item.States?"已认证":"未认证")
+
+                        </td>
+                        <td>@item.CreateTime</td>
+                        <td>@item.CreateName</td>
+                        <td>
+                            <a onclick="return check_href('/StudentMannager/Edit?id=@item.UserID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                                <i class="larry-icon larry-bianji4"></i>编辑
                             </a>
-                        }
-                        else
-                        {
-                            <a onclick="return Enable(@item.UserID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
-                                <i class="larry-icon larry-ttpodicon"></i>启用
+                            <a onclick="return Del(@item.UserID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                <i class="larry-icon larry-ttpodicon"></i>删除
                             </a>
-                        }
-                    </td>
-                </tr>
+                            @if (item.States)
+                            {
+                                <a onclick="return Disable(@item.UserID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                    <i class="larry-icon larry-ttpodicon"></i>禁用
+                                </a>
+                            }
+                            else
+                            {
+                                <a onclick="return Enable(@item.UserID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                    <i class="larry-icon larry-ttpodicon"></i>启用
+                                </a>
+                            }
+                        </td>
+                    </tr>
                 }
             </tbody>
             <tfoot>
@@ -147,7 +147,7 @@
         });
     };
 
-       function Disable(id) {
+    function Enable(id) {
         layer.confirm('确认启用吗？', {
             icon: 3, title: '启用确认'
         }, function (index) {

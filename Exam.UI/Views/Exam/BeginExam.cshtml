@@ -50,7 +50,7 @@
                         <div> <span class="tit">倒计时—@ViewBag.Rule.RuleEndDate</span></div>
                     </div>*@
                 <div class="larry-body-content clearfix">
-                    <form class="layui-form" id="form1">
+                    <form class="layui-form">
                         @foreach (var item in Model)
                         {
                             <blockquote class="layui-elem-quote layui-text">
@@ -67,14 +67,24 @@
                                         if (item.AnswerOptionID.Contains(item2.OptionID.ToString()))
                                         {
                                             <div class="layui-input-block">
-                                                @item2.OptionCode <input type="checkbox" checked name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary" title="@item2.OptionDescribe">
+                                                @item2.OptionCode <input type="checkbox" title="@item2.OptionDescribe" checked name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary">
+                                           
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="layui-input-block">
+                                                @item2.OptionCode <input type="checkbox" title="@item2.OptionDescribe" name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary">
+                                             
+
                                             </div>
                                         }
                                     }
                                     else
                                     {
                                         <div class="layui-input-block">
-                                            @item2.OptionCode <input type="checkbox" name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary" title="@item2.OptionDescribe">
+                                            @item2.OptionCode <input type="checkbox" title="@item2.OptionDescribe" name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary">                                          
                                         </div>
                                     }
 
@@ -90,14 +100,24 @@
                                         if (item.AnswerOptionID.Contains(item2.OptionID.ToString()))
                                         {
                                             <div class="layui-input-block">
-                                                @item2.OptionCode <input type="radio" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" checked lay-skin="primary" title="@item2.OptionDescribe">
+                                                @item2.OptionCode <input type="radio" title="@item2.OptionDescribe" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" checked lay-skin="primary">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="layui-input-block">
+
+                                                @item2.OptionCode <input type="radio" title="@item2.OptionDescribe" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" lay-skin="primary">
+                                              
                                             </div>
                                         }
                                     }
                                     else
                                     {
                                         <div class="layui-input-block">
-                                            @item2.OptionCode <input type="radio" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" lay-skin="primary" title="@item2.OptionDescribe">
+                                            @item2.OptionCode <input type="radio" title="@item2.OptionDescribe" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" lay-skin="primary">
+                                          
+
                                         </div>
                                     }
 
@@ -105,16 +125,17 @@
                                 }
                             }
                             num++;
-                        }                       
+                        }
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>保存</button>
+                                <button class="layui-btn larry-btn" onclick="return Save()">保存</button>
                                 @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
-                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Conmit()" lay-submit>提交</button>
+                                <button class="layui-btn larry-btn" onclick="Conmit()">提交</button>
                             </div>
                         </div>
                     </form>
                 </div>
+               
             </section>
         </div>
     </div>
@@ -152,7 +173,7 @@
         {
             if (data.success) {
                 layer.msg(data.msg);
-                
+
             } else {
                 layer.msg(data.msg);
             }
@@ -162,19 +183,39 @@
 
 
      function Conmit()
-    {
-        $.post("@Url.Action("Conmit", "Exam")",function(data)
-        {
-            if (data.success) {
-                layer.msg(data.msg);
-                setTimeout(function () {
-                    window.location.href = "/Exam/ExamDetail";
-                }, 1000);
-            } else {
-                layer.msg(data.msg);
-            }
-        });
-        return false;
-    };
+     {
+          $.post("@Url.Action("GetCount", "Exam")",function(data)
+          {
+              if (data.success) {
+                  if (data.num > 0) {
+                      layer.confirm('你还有' + data.num + '道题没做确定要提交吗？', {
+                          btn: ['是', '否'] //按钮
+                      }, function () {
+                          commitpost();
+                      }, function () { });
+                  }
+                  else {
+                      commitpost();
+                  }
+              }
+              else {
+                  return false;
+              }
+        })
+    }
+
+    function commitpost() {
+        $.post("@Url.Action("Conmit", "Exam")", function (data) {
+                              if (data.success) {
+                                  layer.msg(data.msg);
+                                  setTimeout(function () {
+                                      window.location.href = "ExamDetail?ruleid=@ViewBag.Rule.PaperRuleID";
+                                  }, 1000);
+                              } else {
+                                  layer.msg(data.msg);
+                              }
+                          });
+    }
+
 </script>
 

@@ -53,39 +53,39 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>@item.LibraryID</td>
-                    <td>@item.Library_Name</td>
-                    <td>@item.CreatTime</td>
-                    <td>@item.UpdateTime</td>
-                    <td>@item.Library_Remark</td>
-                    <td>
-                        @(item.LibraryStates?"启用":"禁用")
+                    <tr>
+                        <td>@item.LibraryID</td>
+                        <td>@item.Library_Name</td>
+                        <td>@item.CreatTime</td>
+                        <td>@item.UpdateTime</td>
+                        <td>@item.Library_Remark</td>
+                        <td>
+                            @(item.LibraryStates?"启用":"禁用")
 
-                    </td>
-                    <td>@item.Exam_Question.Count</td>
-                    <td>
-                        <a onclick="return check_href('/Library/Edit?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
-                            <i class="larry-icon larry-bianji4"></i>编辑
-                        </a>
-                        @if (item.LibraryStates)
-                        {
-                            <a onclick="return Disable(@item.LibraryID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
-                                <i class="larry-icon larry-ttpodicon"></i>禁用
+                        </td>
+                        <td>@item.Exam_Question.Count</td>
+                        <td>
+                            <a onclick="return check_href('/Library/Edit?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                                <i class="larry-icon larry-bianji4"></i>编辑
                             </a>
-                        }
-                        else
-                        {
-                            <a onclick="return Enable(@item.LibraryID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
-                                <i class="larry-icon larry-ttpodicon"></i>启用
-                            </a>
-                        }
+                            @if (item.LibraryStates)
+                            {
+                                <a onclick="return Disable(@item.LibraryID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                    <i class="larry-icon larry-ttpodicon"></i>禁用
+                                </a>
+                            }
+                            else
+                            {
+                                <a onclick="return Enable(@item.LibraryID);" class="ajax-get layui-btn layui-btn-small layui-btn-danger">
+                                    <i class="larry-icon larry-ttpodicon"></i>启用
+                                </a>
+                            }
 
-                        <a onclick="return check_href('/Question/Index?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
-                            <i class="larry-icon larry-bianji4"></i>查看详情
-                        </a>
-                    </td>
-                </tr>
+                            <a onclick="return check_href('/Question/Index?id=@item.LibraryID')" class="larry-add-edit ajax-get layui-btn layui-btn-small layui-btn-normal larry-add-edit">
+                                <i class="larry-icon larry-bianji4"></i>查看详情
+                            </a>
+                        </td>
+                    </tr>
                 }
             </tbody>
             <tfoot>
@@ -136,7 +136,7 @@
         });
     };
 
-       function Disable(id) {
+    function Enable(id) {
         layer.confirm('确认启用吗？', {
             icon: 3, title: '启用确认'
         }, function (index) {
