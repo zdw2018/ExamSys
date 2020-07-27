@@ -43,11 +43,16 @@ namespace Exam.BLL
             {
                 var data = db.Exam_QuestionOptions.Where(X => optioncode.Contains(X.OptionCode) && X.QuestionID == questionID).ToList();
                 string Temp = "";
+                string temp2 = "";
                 foreach (var item in data)
                 {
                     Temp += item.OptionID + ",";
                 }
-                string temp2 = Temp.Remove(Temp.Length - 1, 1);
+                if (Temp.Length>0)
+                {
+                     temp2 = Temp.Remove(Temp.Length - 1, 1);
+                }
+               
                 return temp2;
             }
            

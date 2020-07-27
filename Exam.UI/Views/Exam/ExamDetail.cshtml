@@ -2,7 +2,7 @@
 @using Exam.Model
 @model List<ExamPaperBLL>
 @{
-    var currentuser = Session[CommonFeild.SessionName] as Exam_User;
+   
     int num = 1;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -29,7 +29,7 @@
                             <tr><th><p class="center">试题数量—@ViewBag.Rule.QuestionNum</p></th></tr>
                             <tr><th><p class="center">开始时间—@ViewBag.Rule.RuleStartDate</p></th></tr>
                             <tr><th><p class="center" id="enddate">结束时间—@ViewBag.Rule.RuleEndDate</p></th></tr>
-                            <tr><th><p id="test" class="center">考生姓名：@currentuser.RealName</p></th></tr>
+                            <tr><th><p id="test" class="center">考生姓名：@ViewBag.User.RealName</p></th></tr>
                             <tr><th><p id="test" class="center">考试分数：@ViewBag.Score</p></th></tr>
 
                         </thead>

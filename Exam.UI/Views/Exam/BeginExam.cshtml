@@ -2,7 +2,7 @@
 @model List<ExamPaperBLL>
 @{
     int num = 1;
-    string date = ViewBag.Rule.RuleEndDate.ToString("yyyy/MM/dd HH:mm:ss");
+    //string date = ViewBag.Rule.RuleEndDate.ToString("yyyy/MM/dd HH:mm:ss");
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -24,7 +24,6 @@
                             <tr>
                                 <th><p class="center">考试名称—@ViewBag.Rule.RuleName</p></th>
                             </tr>
-
                             <tr> <th><p class="center">试题总分数—@ViewBag.Rule.Score</p></th></tr>
                             <tr><th><p class="center">试题数量—@ViewBag.Rule.QuestionNum</p></th></tr>
                             <tr><th><p class="center">开始时间—@ViewBag.Rule.RuleStartDate</p></th></tr>
@@ -34,21 +33,6 @@
                         </thead>
                     </table>
                 </div>
-
-
-                @*<div class="larry-body-header" style="text-align:center;height:auto">
-                        <div> <span class="tit">考试名称—@ViewBag.Rule.RuleName</span></div>
-
-                        <div> <span class="tit">试题总分数—@ViewBag.Rule.Score</span></div>
-
-                        <div> <span class="tit">试题数量—@ViewBag.Rule.QuestionNum</span></div>
-
-                        <div> <span class="tit">开始时间—@ViewBag.Rule.RuleStartDate</span></div>
-
-                        <div> <span class="tit" id="enddate">结束时间—@ViewBag.Rule.RuleEndDate</span></div>
-
-                        <div> <span class="tit">倒计时—@ViewBag.Rule.RuleEndDate</span></div>
-                    </div>*@
                 <div class="larry-body-content clearfix">
                     <form class="layui-form">
                         @foreach (var item in Model)
@@ -128,9 +112,9 @@
                         }
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button class="layui-btn larry-btn" onclick="return Save()">保存</button>
+                                <a class="layui-btn larry-btn" onclick="Save()">保存</a>
                                 @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
-                                <button class="layui-btn larry-btn" onclick="Conmit()">提交</button>
+                                <a class="layui-btn larry-btn" onclick="Conmit()">提交</a>
                             </div>
                         </div>
                     </form>
@@ -159,7 +143,7 @@
   var util = layui.util;
 
       //示例
-      var endTime = new Date("@date"),//假设为结束日期
+      var endTime = new Date("@ViewBag.date"),//假设为结束日期
   serverTime = new Date(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
 
   util.countdown(endTime, serverTime, function(date, serverTime, timer){
@@ -177,8 +161,7 @@
             } else {
                 layer.msg(data.msg);
             }
-        });
-        return false;
+        });       
     };
 
 

@@ -16,8 +16,6 @@ namespace Exam.UI.Controllers
     public class ExamController : Controller
     {
         private static Dictionary<int, List<Exam_Answer>> listanswer = new Dictionary<int, List<Exam_Answer>>();
-        //private static List<Exam_Answer> listanswer = new List<Exam_Answer>();
-        //private static List<Exam_Answer> Newlistanswer = new List<Exam_Answer>();
         // GET: Exam
         public ActionResult Index(int page = 1)
         {
@@ -26,6 +24,7 @@ namespace Exam.UI.Controllers
             IPagedList list = PaperRuleService.GetListEnable(page);
             return View(list);
         }
+        [HttpGet]
         /// <summary>
         /// 开始考试
         /// </summary>
@@ -34,7 +33,10 @@ namespace Exam.UI.Controllers
         public ActionResult BeginExam(int ruleid)
         {          
             var currentuser = Session[CommonFeild.SessionName] as Exam_User;
-            ViewBag.Rule = PaperRuleService.FindPaperRuleByID(ruleid);            
+            var data = PaperRuleService.FindPaperRuleByID(ruleid);
+            ViewBag.Rule = data;
+            ViewBag.date = data.RuleEndDate.ToString("yyyy/MM/dd HH:mm:ss");
+            
             var list = ExamPaperService.GeneratePaper(ruleid, currentuser.UserID);
             if(!listanswer.ContainsKey(currentuser.UserID))
             {
@@ -198,6 +200,7 @@ namespace Exam.UI.Controllers
             //获取考试信息
             var paper = ExamPaperService.CheckPaper(ruleid,currentuser.UserID);
 
+            ViewBag.User = currentuser;
             ViewBag.Rule = PaperRuleService.FindPaperRuleByID(paper.RuleID);
             ViewBag.Score = paper.UserScore;
             //获取答题信息 

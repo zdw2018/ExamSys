@@ -33,14 +33,6 @@ namespace Exam.UI.Controllers
             ScoreTotleModel score = ExamPaperService.GetScoreModel(ruleid);
             return View(score);
         }
-        ///// <summary>
-        ///// 错题统计
-        ///// </summary>
-        ///// <returns></returns>
-        //public ActionResult ErrorQuestion(int ruleid)
-        //{
-
-        //    return View();
-        //}
+     
     }
 }
