@@ -69,13 +69,13 @@
         $.post("@Url.Action("Edit", "StudentMannager")",$('#form1').serialize(),function(data)
         {
             if (data.success) {
-                layer.msg("修改成功");
+                layer.msg(data.msg);
                 setTimeout(function () {
                     //top.document.getElementById('tabCtrA').click();
                     window.location.href = "/StudentMannager/Index";
                 }, 1000);
             } else {
-                layer.msg("修改失败," + data.msg);
+                layer.msg( data.msg);
             }
         });
         return false;

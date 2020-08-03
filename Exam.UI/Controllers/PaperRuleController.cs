@@ -32,7 +32,7 @@ namespace Exam.UI.Controllers
 
                 return Json(new { msg = "删除失败" + ex, success = false });
             }
-            return Json(new { msg = "删除成功", success = false });
+            return Json(new { msg = "删除成功", success = true });
         }
         public ActionResult AddPaper()
         {
@@ -82,7 +82,7 @@ namespace Exam.UI.Controllers
                 return Json(new { msg = "修改失败" + ex, success = false });
 
             }
-            return Json(new { msg = "修改成功", success = false });
+            return Json(new { msg = "修改成功", success = true });
         }
 
         [HttpPost]

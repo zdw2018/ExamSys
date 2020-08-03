@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">题库备注</label>
+                            <label class="layui-form-label">选项值</label>
                             <div class="layui-input-block">
                                 <input type="text" name="optioncode" id="txt_optioncode" aautocomplete="off" class="layui-input larry-input" value="@Model.OptionCode" placeholder="请输入题目选项值例如（A B C D ）">
                             </div>
@@ -32,7 +32,7 @@
                             <div class="layui-input-block">
                                 <input type="hidden" name="id" id="txt_lmid" value="@ViewBag.Optionid" />
                                 @*<input class="layui-btn" id="btnSave" onclick="return Save();" type="submit" value="立即提交" />*@
-                                <button class="layui-btn larry-btn" lay-filter="submit" onclick="return Save()" lay-submit>立即提交</button>
+                                <a class="layui-btn larry-btn" lay-filter="submit" onclick=" Save()" lay-submit>立即提交</a>
                             </div>
                         </div>
                     </form>
@@ -45,20 +45,16 @@
 
     function Save()
     {
-
-
         $.post("@Url.Action("Edit", "QuestionOption")",$('#form1').serialize(),function(data)
-        {
+        {          
             if (data.success) {
-                layer.msg("修改成功");
-                setTimeout(function () {
-                    //top.document.getElementById('tabCtrA').click();
-                    window.location.href = "/QuestionOption/Index?id=@ViewBag.Questionid";
-                }, 1000);
+                layer.msg(data.msg);
+                setTimeout(function () {              
+                    location.href = "/QuestionOption/Index?id=@ViewBag.Questionid";
+                }, 1000);                
             } else {
-                layer.msg("修改失败," + data.msg);
+                layer.msg(data.msg);
             }
-        });
-        return false;
+        });      
     }
 </script>

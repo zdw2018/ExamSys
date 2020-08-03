@@ -13,7 +13,7 @@ namespace Exam.UI.Controllers
     public class QuestionOptionController : Controller
     {
         // GET: QuestionOption    
-        public int questiuonid = 0;
+        public static int questiuonid = 0;
         public ActionResult Index(int id, int page = 1)
         {
             questiuonid = id;
@@ -47,7 +47,7 @@ namespace Exam.UI.Controllers
 
                 return Json(new { msg = "修改失败" + ex, success = false });
             }
-            return Json(new { msg = "修改成功", success = false });
+            return Json(new { msg = "修改成功", success = true });
         }
 
         /// <summary>

@@ -89,14 +89,6 @@
     </div>
 </div>
 <script>
-
-
-    function Search() {
-        $.post("@Url.Action("Index", "Question")", { id:@ViewBag.ID, questionname: $("#search_input").val() })
-
-
-    }
-
     function Disable(id) {
         layer.confirm('确认删除吗', {
             icon: 3, title: '删除确认'

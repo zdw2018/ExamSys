@@ -606,7 +606,9 @@
     <Content Include="Views\Student\MyError.cshtml" />
     <Content Include="Views\ExamMannage\Totle.cshtml" />
     <Content Include="Views\ExamMannage\ErrorQuestion.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\ExamSys - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ExamSys - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ExamSys - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Exam.BLL\Exam.BLL.csproj">

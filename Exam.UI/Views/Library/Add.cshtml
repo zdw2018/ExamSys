@@ -47,13 +47,13 @@
         $.post("@Url.Action("Add", "Library")",$('#form1').serialize(),function(data)
         {
             if (data.success) {
-                layer.msg("添加成功");
+                layer.msg(data.msg);
                 setTimeout(function () {
                     //top.document.getElementById('tabCtrA').click();
                     window.location.href = "/Library/Index";
                 }, 1000);
             } else {
-                layer.msg("添加失败," + data.msg);
+                layer.msg(data.msg);
             }
         });
         return false;
