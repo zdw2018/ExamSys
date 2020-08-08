@@ -99,12 +99,13 @@ namespace Exam.UI.Controllers
             }
             catch (Exception ex)
             {
-                //return Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加失败'" + ex + ");window.location.href='/Library/Index'})</script>");
 
-                return this.Content($"<script>alert('{ex}')</script>");
+
+
+                return this.Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.alert('导入失败', { skin: 'layui-layer-molv' }, function () { window.location.href = '/Library/Index'; });})</script>");
 
             }
-            return this.Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.msg('添加成功');window.location.href='/Library/Index'})</script>");
+            return this.Content("<script src='../../Content/Common/plus/jquery-3.2.1.min.js'></script><script src='../../Content/Common/frame/layui/layui.js'></script><script>layui.use('layer', function () {var $ = layui.jquery, layer = layui.layer;layer.alert('导入成功', { skin: 'layui-layer-molv' }, function () { window.location.href = '/Library/Index'; });})</script>");
         }
         [HttpPost]
         public ActionResult Add(string libraryname, string libraryremark)

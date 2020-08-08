@@ -24,7 +24,7 @@ namespace Exam.Model
         /// </summary>
 
         public int LibraryID { get; set; }
-        [StringLength(200)]
+        [StringLength(1000)]
         /// <summary>
         /// 试题描述
         /// </summary>

@@ -11,7 +11,7 @@
 <div class="larry-fluid larry-wrapper fadeInRightBig">
     <div class="layui-row lay-col-space15 ">
         <table class="layui-table" lay-skin="line">
-           
+
             <caption> <span class="tit">试卷名称：@ViewBag.Info.RuleName 总分：@ViewBag.Info.Score 总人数： @Model.StudentNum</span></caption>
             <colgroup>
                 <col>
@@ -26,13 +26,13 @@
                     <th>平均分</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>@Model.MaxScore</td>
-                    <td>@Model.MinScore</td>
-                    <td>@Model.ScoreAvg</td>
-                </tr>
-            </tbody>
+                <tbody>
+                    <tr>
+                        <td>@Model.MaxScore</td>
+                        <td>@Model.MinScore</td>
+                        <td>@Model.ScoreAvg</td>
+                    </tr>
+                </tbody>
         </table>
 
         <div id="main" class="center" style="width: 600px;height:400px;"></div>
@@ -55,7 +55,7 @@
                 yAxis: {},
                 series: [{
                     name: '人数',
-                    type: 'bar',
+                    type: 'bar',                
                     data: [@Model.Score60,@Model.Score6070,@Model.Score7080,@Model.Score8090,@Model.Score90100,@Model.Score100]
                 }]
             };

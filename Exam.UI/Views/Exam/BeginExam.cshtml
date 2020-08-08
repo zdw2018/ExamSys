@@ -68,7 +68,7 @@
                                     else
                                     {
                                         <div class="layui-input-block">
-                                            @item2.OptionCode <input type="checkbox" title="@item2.OptionDescribe" name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary">                                          
+                                            @item2.OptionCode <input type="checkbox" title="& lt;body& gt;@item2.OptionDescribe& lt;body& gt;" name="question[@item.Exam_Question.QuestionID]" value="@item2.OptionID,@item.Exam_Question.QuestionID" lay-skin="primary">                                          
                                         </div>
                                     }
 
@@ -84,7 +84,7 @@
                                         if (item.AnswerOptionID.Contains(item2.OptionID.ToString()))
                                         {
                                             <div class="layui-input-block">
-                                                @item2.OptionCode <input type="radio" title="@item2.OptionDescribe" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" checked lay-skin="primary">
+                                                @item2.OptionCode <input type="radio" title="& lt;body& gt; @item2.OptionDescribe & lt;body& gt;" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" checked lay-skin="primary">
                                             </div>
                                         }
                                         else
@@ -99,7 +99,7 @@
                                     else
                                     {
                                         <div class="layui-input-block">
-                                            @item2.OptionCode <input type="radio" title="@item2.OptionDescribe" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" lay-skin="primary">
+                                            @item2.OptionCode <input type="radio" title="& lt;body& gt; @item2.OptionDescribe & lt;body& gt;" value="@item2.OptionID,@item.Exam_Question.QuestionID" name="question[@item.Exam_Question.QuestionID]" lay-skin="primary">
                                           
 
                                         </div>

@@ -27,7 +27,10 @@ namespace Exam.UI.Controllers
         public ActionResult MyInfo()
         {
            var currentuser= Session[CommonFeild.SessionName] as Exam_User;
-            return View(currentuser);
+
+            var data = StudentMannerService.FindStudentByID(currentuser.UserID);
+
+            return View(data);
         }
         [HttpPost]
         public ActionResult Edit(string uname, string Name, string phone, string id)

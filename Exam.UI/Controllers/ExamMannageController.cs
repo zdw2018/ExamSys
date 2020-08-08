@@ -31,6 +31,7 @@ namespace Exam.UI.Controllers
             ViewBag.Info = rule;
 
             ScoreTotleModel score = ExamPaperService.GetScoreModel(ruleid);
+           
             return View(score);
         }
      
